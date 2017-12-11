@@ -1,0 +1,18 @@
+
+{{!< default}}
+<div class="container">
+	<div class="jumbotron"><img src="/images/logo.png" width="86">
+		<hr>
+		<p>欢迎使用青橙 - 运营管理后台。</p>
+	{{#if user}}
+		<p>进入管理后台：</p>
+		<p><a href="/keystone" style="margin-right: 10px" class="btn btn-lg btn-primary">进入</a></p>
+	{{else}}
+		<p>请登录：</p>
+		<p><a href="/keystone/signin" style="margin-right: 10px" class="btn btn-lg btn-primary">登录</a></p>
+	{{/if}}
+
+		<hr>
+		<p>如有疑问，请联系管理员。</p>
+	</div>
+</div>
