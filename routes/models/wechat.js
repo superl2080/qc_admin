@@ -8,8 +8,20 @@ var system = require('../../models/system');
 var ad = require('../../models/ad');
 
 
-var APP_ID = exports.APP_ID = 'wx5fdfd5e17476a190';
-var APP_SECRET = 'c6990eae524d5d385d8854bbab9d7725';
+var KF_APP_ID;
+var KF_APP_SECRET;
+if(process.env.NODE_ENV === 'production') {
+    KF_APP_ID = 'wx5fdfd5e17476a190';
+    KF_APP_SECRET = 'c6990eae524d5d385d8854bbab9d7725';
+} else {
+    KF_APP_ID = 'wx26950c03b65b93ed';
+    KF_APP_SECRET = '2d02bf96c35695b001db3c053c2b0abf';
+}
+
+var APP_ID = exports.APP_ID = KF_APP_ID;
+var APP_SECRET = KF_APP_SECRET;
+
+
 var ENCODING_AES_KEY = '2c3a4d54806a9f9442c6f5ebf10a1e53wx1676ae64c';
 var AES_KEY = new Buffer(ENCODING_AES_KEY + '=', 'base64');
 var IV = AES_KEY.slice(0, 16);
