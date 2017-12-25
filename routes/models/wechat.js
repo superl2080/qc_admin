@@ -89,16 +89,6 @@ exports.parseXml = function (xml, callback) {
     });
 }
 
-exports.updateVerifyTicket = function(component_verify_ticket, callback) {
-    console.log('[CALL] routes/models/wechat/updateVerifyTicket');
-    console.log('component_verify_ticket: ');
-    console.log(component_verify_ticket);
-
-    system.updateVerifyTicket(component_verify_ticket, function (err, systemInfo) {
-        callback(err, systemInfo);
-    });
-}
-
 function updatingToken() {
     console.log('[CALL] routes/models/wechat/updatingToken');
 

@@ -33,12 +33,6 @@ exports.findOne = function(callback) {
     });
 }
 
-exports.updateVerifyTicket = function(component_verify_ticket, callback) {
-    system.model.findOneAndUpdate({ }, {$set: {component_verify_ticket: component_verify_ticket}}, {new: true})
-    .exec(function (err, systemInfo) {
-        callback(err, systemInfo);
-    });
-}
 
 exports.updateAccessToken = function(component_access_token, callback) {
     system.model.findOneAndUpdate({ }, {$set: {component_access_token: component_access_token}}, {new: true})
