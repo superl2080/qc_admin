@@ -8,22 +8,11 @@ var system = require('../../models/system');
 var ad = require('../../models/ad');
 
 
-var KF_APP_ID;
-var KF_APP_SECRET;
-if(process.env.NODE_ENV === 'production') {
-    KF_APP_ID = 'wx5fdfd5e17476a190';
-    KF_APP_SECRET = 'c6990eae524d5d385d8854bbab9d7725';
-} else {
-    KF_APP_ID = 'wx26950c03b65b93ed';
-    KF_APP_SECRET = '2d02bf96c35695b001db3c053c2b0abf';
-}
+const WECHAT_OPEN_APP_ID = process.env.WECHAT_OPEN_APP_ID;
+const WECHAT_OPEN_APP_SECRET = process.env.WECHAT_OPEN_APP_SECRET;
+const WECHAT_OPEN_ENCODE_KEY = process.env.WECHAT_OPEN_ENCODE_KEY;
 
-var APP_ID = exports.APP_ID = KF_APP_ID;
-var APP_SECRET = KF_APP_SECRET;
-
-
-var ENCODING_AES_KEY = '2c3a4d54806a9f9442c6f5ebf10a1e53wx1676ae64c';
-var AES_KEY = new Buffer(ENCODING_AES_KEY + '=', 'base64');
+var AES_KEY = new Buffer(WECHAT_OPEN_ENCODE_KEY + '=', 'base64');
 var IV = AES_KEY.slice(0, 16);
 
 
@@ -56,7 +45,7 @@ exports.encrypt = function (xmlMsg) {
     var msg = new Buffer(xmlMsg);
     var msgLength = new Buffer(4);
     msgLength.writeUInt32BE(msg.length, 0);
-    var corpId = new Buffer(APP_ID);
+    var corpId = new Buffer(WECHAT_OPEN_APP_ID);
     var raw_msg = Buffer.concat([random16, msgLength, msg, corpId]);
 
     raw_msg = PKCS7Encode(raw_msg);
@@ -73,10 +62,10 @@ exports.decrypt = function (msg_encrypt) {
     console.log(msg_encrypt);
 
     var decipher = crypto.createDecipheriv('aes-256-cbc', AES_KEY, IV);
-	decipher.setAutoPadding(false);
+    decipher.setAutoPadding(false);
 
-	var decipheredBuff = Buffer.concat([decipher.update(msg_encrypt, 'base64'), decipher.final()]);
-	decipheredBuff = PKCS7Decode(decipheredBuff);
+    var decipheredBuff = Buffer.concat([decipher.update(msg_encrypt, 'base64'), decipher.final()]);
+    decipheredBuff = PKCS7Decode(decipheredBuff);
 
     var len_netOrder_corpid = decipheredBuff.slice(16);
     var msg_len = len_netOrder_corpid.slice(0, 4).readUInt32BE(0);
@@ -91,10 +80,10 @@ exports.decrypt = function (msg_encrypt) {
 exports.parseXml = function (xml, callback) {
     console.log('[CALL] routes/models/wechat/parseXml');
 
-	console.log('xml data: ');
+    console.log('xml data: ');
     console.log(xml);
     xml2jsParser.parseString(xml, function (err, result) {
-    	console.log('JSON data: ');
+        console.log('JSON data: ');
         console.log(result);
         callback(err, result);
     });
@@ -113,33 +102,33 @@ exports.updateVerifyTicket = function(component_verify_ticket, callback) {
 function updatingToken() {
     console.log('[CALL] routes/models/wechat/updatingToken');
 
-	system.findOne(function (err, systemInfo) {
-	    var option = {
-	        url: 'https://api.weixin.qq.com/cgi-bin/component/api_component_token',
-	        method: 'POST',
-	        headers: {  
-	            'content-type': 'application/json'
-	        },
-	        json: {
-	            component_appid: APP_ID,
-				component_appsecret: APP_SECRET, 
-				component_verify_ticket: systemInfo.component_verify_ticket
-	        }
-	    };
+    system.findOne(function (err, systemInfo) {
+        var option = {
+            url: 'https://api.weixin.qq.com/cgi-bin/component/api_component_token',
+            method: 'POST',
+            headers: {  
+                'content-type': 'application/json'
+            },
+            json: {
+                component_appid: WECHAT_OPEN_APP_ID,
+                component_appsecret: WECHAT_OPEN_APP_SECRET, 
+                component_verify_ticket: systemInfo.component_verify_ticket
+            }
+        };
 
-	    request.post(option, function(err2, ret, body) {
-    		console.log('[CALL] routes/models/wechat/updatingToken post return:');
-	        console.log(body);
-	        if(!ret.statusCode ||
-	            ret.statusCode != 200) {
-	            
-	        } else {
-				system.updateAccessToken(body.component_access_token, function (err3, systemInfo2) {
-					
-				});
-	        }
-	    });
-	});
+        request.post(option, function(err2, ret, body) {
+            console.log('[CALL] routes/models/wechat/updatingToken post return:');
+            console.log(body);
+            if(!ret.statusCode ||
+                ret.statusCode != 200) {
+                
+            } else {
+                system.updateAccessToken(body.component_access_token, function (err3, systemInfo2) {
+                    
+                });
+            }
+        });
+    });
 }
 
 var updatingPreAuthCode = exports.updatingPreAuthCode = function () {
@@ -155,7 +144,7 @@ var updatingPreAuthCode = exports.updatingPreAuthCode = function () {
                 'content-type': 'application/json'
             },
             json: {
-                component_appid: APP_ID
+                component_appid: WECHAT_OPEN_APP_ID
             }
         };
 
@@ -186,7 +175,7 @@ exports.getQueryAuth = function(authorization_code, callback) {
                 'content-type': 'application/json'
             },
             json: {
-                component_appid: APP_ID,
+                component_appid: WECHAT_OPEN_APP_ID,
                 authorization_code: authorization_code
             }
         };
@@ -218,7 +207,7 @@ function updatingAdToken() {
                         'content-type': 'application/json'
                     },
                     json: {
-                        component_appid: APP_ID,
+                        component_appid: WECHAT_OPEN_APP_ID,
                         authorizer_appid: adInfo.appid, 
                         authorizer_refresh_token: adInfo.refresh_token
                     }
@@ -246,7 +235,7 @@ function updatingAdToken() {
 
 updatingToken();
 setInterval(function () {
-	updatingToken();
+    updatingToken();
 }, 90 * 60 * 1000);
 
 updatingPreAuthCode();

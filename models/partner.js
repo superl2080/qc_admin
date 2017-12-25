@@ -6,18 +6,18 @@ var Types = keystone.Field.Types;
  * ==========
  */
 var partner = new keystone.List('partner', {
-	label: '合伙人',
-	plural: '合伙人',
-	defaultSort: '-signDate'
+    label: '合伙人',
+    plural: '合伙人',
+    defaultSort: '-signDate'
 });
 
 partner.add({
-	name: { type: Types.Text, required: true, initial: true, index: true, label: '合伙人名称' },
-	email: { type: Types.Text, required: true, unique: true, initial: true, index: true, label: '账号' },
-	password: { type: Types.Password, initial: true, label: '密码' },
-	phone: { type: Types.Text, required: true, initial: true, index: true, label: '联系电话' },
-	balance: { type: Types.Number, default: 0, label: '账户余额(分)'},
-	signDate: { type: Types.Datetime, required: true, default: Date.now, label: '注册日期'},
+    name: { type: Types.Text, required: true, initial: true, index: true, label: '合伙人名称' },
+    email: { type: Types.Text, required: true, unique: true, initial: true, index: true, label: '账号' },
+    password: { type: Types.Password, initial: true, label: '密码' },
+    phone: { type: Types.Text, required: true, initial: true, index: true, label: '联系电话' },
+    balance: { type: Types.Number, default: 0, label: '账户余额(分)'},
+    signDate: { type: Types.Datetime, required: true, default: Date.now, label: '注册日期'},
 });
 
 

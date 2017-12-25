@@ -6,16 +6,16 @@ var Types = keystone.Field.Types;
  * ==========
  */
 var system = new keystone.List('system', {
-	label: '系统参数',
-	plural: '系统参数',
-	nocreate: true
+    label: '系统参数',
+    plural: '系统参数',
+    nocreate: true
 });
 
 system.add({
-	name: { type: Types.Text, label: '名称' },
-	component_verify_ticket: { type: Types.Text },
-	component_access_token: { type: Types.Text },
-	pre_auth_code: { type: Types.Text },
+    name: { type: Types.Text, label: '名称' },
+    component_verify_ticket: { type: Types.Text },
+    component_access_token: { type: Types.Text },
+    pre_auth_code: { type: Types.Text },
 });
 
 
@@ -27,8 +27,8 @@ system.register();
 
 
 exports.findOne = function(callback) {
-	system.model.findOne({ })
-	.exec(function (err, systemInfo) {
+    system.model.findOne({ })
+    .exec(function (err, systemInfo) {
         callback(err, systemInfo);
     });
 }

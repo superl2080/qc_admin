@@ -8,18 +8,18 @@ keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views'),
+    views: importRoutes('./views'),
 };
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
-	// Views
-	app.get('/', routes.views.home);
-	app.get('/createAd', middleware.requireUser);
-	app.all('/createAd', routes.views.createAd);
+    // Views
+    app.get('/', routes.views.home);
+    
+    app.get('/createAd', middleware.requireUser);
+    app.get('/createAd', routes.views.createAd);
 
-	// wechat
-	app.post('/wechat/notice', routes.views.wechatNotice);
-	app.post('/wechat/ad/:appid', routes.views.wechatAd);
+    // wechat
+    app.post('/wechat/ad/:appid', routes.views.wechatAd);
 
 };
