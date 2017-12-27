@@ -27,10 +27,10 @@ point.add({
 
     }, '部署信息', {
     deployInfo: {
-        payout:             { type: Types.Number,       required: true, label: '点位支付用户计费(分)'},
-        name:               { type: Types.Text,         required: true, label: '点位名' },
-        shop:               { type: Types.Text,         required: true, label: '店铺名' },
-        operatorWechatId:   { type: Types.Text,         required: true, label: '运维通知人' },
+        payout:             { type: Types.Number,       label: '点位支付用户计费(分)'},
+        name:               { type: Types.Text,         label: '点位名' },
+        shop:               { type: Types.Text,         label: '店铺名' },
+        operatorWechatId:   { type: Types.Text,         label: '运维通知人' },
     },
 
     info: {
