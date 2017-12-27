@@ -14,12 +14,16 @@ router.get('/model/staff/init', function(req, res, next) {
     .exec(function (err, staff) {
         if( !staff ) {
             staffModel.create({
-                id: 'super',
+                logid: 'super',
                 name: 'Super',
                 password: 'superliu',
                 character: 'MANAGER',
             }, (err, callback) => {
-                res.send('create a super');
+                if( !err ) {
+                    res.send('create a super');
+                } else {
+                    res.send(err);
+                }
             });
         } else {
             res.send('already have staff');
