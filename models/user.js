@@ -6,48 +6,33 @@ var Types = keystone.Field.Types;
  * ==========
  */
 var user = new keystone.List('user', {
-    label: '消费者',
-    plural: '消费者',
+    label: '用户',
+    plural: '用户',
     nocreate: true,
-    defaultSort: '-signDate'
+    defaultSort: '-createDate'
 });
 
 user.add({
-    name: { type: Types.Text, required: true, index: true, label: '用户名' },
-    relate: { 
-        openId: { type: Types.Text, label: 'OpenId'},
+    createDate:             { type: Types.Datetime,     noedit: true, default: new Date(), label: '创建日期'},
+    authId: {
+        wechatId:           { type: Types.Text,         noedit: true, index: true, label: '微信openId' },
     },
-    signDate: { type: Types.Datetime, required: true, default: Date.now, label: '注册日期'},
 
-});
-
-user.schema.add({
-    finishedAppids: { type: [String] }
+    info: {
+        lastDate:           { type: Types.Datetime,     noedit: true, label: '上次登录日期'},
+        loginTimes:         { type: Types.Number,       noedit: true, label: '登录次数' },
+        signType:           { type: Types.Select,       noedit: true, options: [{ value: 'WECHAT', label: '微信' }], label: '注册方式'},
+        nickname:           { type: Types.Text,         noedit: true, label: '昵称'},
+        sex:                { type: Types.Select,       noedit: true, options: [{ value: 0, label: '未知' }, { value: 1, label: '男' }, { value: 2, label: '女' }], label: '性别'},
+        city:               { type: Types.Text,         noedit: true, label: '城市'},
+        province:           { type: Types.Text,         noedit: true, label: '省'},
+        country:            { type: Types.Text,         noedit: true, label: '国家'},
+        tags:               { type: Types.TextArray,    noedit: true, label: '标签'},
+    }
 });
 
 /**
  * Registration
  */
-user.defaultColumns = 'name, signDate';
+user.defaultColumns = 'info.nickname, info.sex, info.city, info.lastDate, info.loginTimes, createDate';
 user.register();
-
-exports.finishAd = function(param, callback) {
-    user.model.findOne({_id: param.userId})
-    .exec(function (err, userInfo) {
-        console.log('[CALL] models/user/finishAd userInfo: ');
-        console.log(userInfo);
-        if( err
-            || !userInfo
-            || userInfo.finishedAppids.indexOf(param.appid) != -1
-             ) {
-            callback(err, userInfo);
-        } else {
-            userInfo.finishedAppids.push(param.appid);
-            console.log('[CALL] models/user/finishAd new userInfo: ');
-            console.log(userInfo);
-            userInfo.save(function (err) {
-                callback(err, userInfo);
-            });
-        }
-    });
-}

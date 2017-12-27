@@ -8,21 +8,38 @@ var Types = keystone.Field.Types;
 var partner = new keystone.List('partner', {
     label: '合伙人',
     plural: '合伙人',
-    defaultSort: '-signDate'
+    defaultSort: '-createDate'
 });
 
 partner.add({
-    name: { type: Types.Text, required: true, initial: true, index: true, label: '合伙人名称' },
-    email: { type: Types.Text, required: true, unique: true, initial: true, index: true, label: '账号' },
-    password: { type: Types.Password, initial: true, label: '密码' },
-    phone: { type: Types.Text, required: true, initial: true, index: true, label: '联系电话' },
-    balance: { type: Types.Number, default: 0, label: '账户余额(分)'},
-    signDate: { type: Types.Datetime, required: true, default: Date.now, label: '注册日期'},
+    id:                     { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '账号' },
+    password:               { type: Types.Password,     required: true, initial: true, label: '密码' },
+    name:                   { type: Types.Text,         required: true, initial: true, label: '名称' },
+    createDate:             { type: Types.Datetime,     noedit: true, default: new Date(), label: '创建日期'},
+    authId: {
+        wechatId:           { type: Types.Text,         noedit: true, index: true, label: '微信openId' },
+    },
+
+    balance:                { type: Types.Number,       required: true, initial: true, label: '待结算余额(分)'},
+    payout:                 { type: Types.Number,       required: true, initial: true, label: '点位支付用户计费(分)'},
+    income:                 { type: Types.Number,       required: true, initial: true, label: '点位支付平台提成(分)'},
+    character:              { type: Types.Select,       required: true, initial: true, options: [{ value: 'DAILI', label: '代理' }, { value: 'ZHITUI', label: '直推' }], label: '角色'},
+
+    partnerBonus: {
+        partnerId:          { type: Types.Relationship, required: true, initial: true, ref: 'partner', label: '推荐人' },
+    },
+
+    info: {
+        lastDate:           { type: Types.Datetime,     noedit: true, label: '上次登录日期'},
+        loginTimes:         { type: Types.Number,       noedit: true, default: 0, label: '登录次数' },
+        phone:              { type: Types.Text,         label: '联系电话' },
+        descript:           { type: Types.Text,         label: '备注' },
+    }
 });
 
 
 /**
  * Registration
  */
-partner.defaultColumns = 'name, email, phone, balance, signDate';
+partner.defaultColumns = 'name, character, balance, payout, income, info.phone, createDate';
 partner.register();

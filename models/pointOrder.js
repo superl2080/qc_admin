@@ -2,58 +2,45 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * DeviceOrder Model
+ * pointOrder Model
  * ==========
  */
-var deviceOrder = new keystone.List('deviceOrder', {
-    label: '领用记录',
-    plural: '领用记录',
+var pointOrder = new keystone.List('pointOrder', {
+    label: '领用订单',
+    plural: '领用订单',
     nocreate: true,
-    defaultSort: '-date'
+    defaultSort: '-createDate'
 });
 
-deviceOrder.add({
-    userId: { type: Types.Relationship, ref: 'user', required: true, index: true, label: '用户' },
-    devNo: { type: Types.Text, required: true, index: true, label: '设备编号' },
-    type: { type: Types.Select, options: 'ZHIJIN, JUANZHI', required: true, index: true, label: '设备类型'},
-    city: { type: Types.Text, required: true, index: true, label: '城市' },
-    partnerId: { type: Types.Relationship, ref: 'partner', required: true, index: true, label: '所属合伙人' },
-    income: { type: Types.Number, required: true, label: '用户收费(分)'},
-    state: { type: Types.Select, options: 'OPEN, SUCCESS, FAIL, TAKED', required: true, index: true, label: '状态'},
-    date: { type: Types.Datetime, required: true, default: Date.now, label: '领用日期'},
+pointOrder.add({
+    createDate:             { type: Types.Datetime,     noedit: true, label: '创建日期'},
+
+    userId:                 { type: Types.Relationship, noedit: true, ref: 'user', label: '消费用户' },
+    pointId:                { type: Types.Relationship, noedit: true, ref: 'point', label: '消费点位' },
+    payout:                 { type: Types.Number,       noedit: true, label: '点位支付待付款(分)'},
+    state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '开放' }, { value: 'PAY', label: '已支付' }, { value: 'SUCCESS', label: '完成领取' }, { value: 'FAIL', label: '失败' }], label: '状态'},
+
+    }, '广告信息', {
+    adInfo: {
+        adId:               { type: Types.Relationship, noedit: true, ref: 'ad', label: '投放广告' },
+        wechatMpApiInfo: {
+            appid:          { type: Types.Text,         noedit: true, label: '广告appid' },
+            qrcode_url:     { type: Types.Text,         noedit: true, label: '广告二维码' },
+            auth:           { type: Types.Boolean,      noedit: true, label: '认证服务号' },
+        },
+    },
+
+    }, '支付信息', {
+    payInfo: {
+        type:               { type: Types.Select,       noedit: true, options: [{ value: 'AD', label: '看广告' }, { value: 'PAY', label: '付款' }], label: '支付类型'},
+        tradeAdId:          { type: Types.Relationship, noedit: true, ref: 'tradeAd', label: '广告记录' },
+        tradePayId:         { type: Types.Relationship, noedit: true, ref: 'tradePay', label: '支付记录' },
+    }
 });
 
 
 /**
  * Registration
  */
-deviceOrder.defaultColumns = 'userId, devNo, type, city, partnerId, date';
-deviceOrder.register();
-
-exports.finishAd = function(param, callback) {
-    deviceOrder.model.findOne({userId: param.userId, state: 'OPEN'})
-    .exec(function (err, deviceOrderInfo) {
-        if(deviceOrderInfo) {
-            deviceOrderInfo.state = 'SUCCESS';
-            deviceOrderInfo.save(function (err) {
-                callback(err, deviceOrderInfo);
-            });
-        } else {
-            callback(err, deviceOrderInfo);
-        }
-    });
-}
-
-exports.finishTake = function(param, callback) {
-    deviceOrder.model.findById(param.deviceOrderInfo._id)
-    .exec(function (err, deviceOrderInfo) {
-        if(deviceOrderInfo) {
-            deviceOrderInfo.state = 'TAKED';
-            deviceOrderInfo.save(function (err) {
-                callback(err, deviceOrderInfo);
-            });
-        } else {
-            callback(err, deviceOrderInfo);
-        }
-    });
-}
+pointOrder.defaultColumns = 'userId, pointId, payout, state, adInfo.adId, payInfo.type, createDate';
+pointOrder.register();

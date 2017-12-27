@@ -16,10 +16,11 @@ exports = module.exports = function (app) {
     // Views
     app.get('/', routes.views.home);
     
+    if( process.env.NODE_ENV == 'test' ) {
+        app.use('/test', routes.views.test.router);
+    }
+
     app.get('/createAd', middleware.requireUser);
     app.get('/createAd', routes.views.createAd);
-
-    // wechat
-    app.post('/wechat/ad/:appid', routes.views.wechatAd);
 
 };

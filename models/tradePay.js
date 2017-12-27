@@ -2,28 +2,36 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * IncomeOrder Model
+ * tradePay Model
  * ==========
  */
-var incomeOrder = new keystone.List('incomeOrder', {
+var tradePay = new keystone.List('tradePay', {
     label: '支付记录',
     plural: '支付记录',
     nocreate: true,
-    defaultSort: '-date'
+    defaultSort: '-createDate'
 });
 
-incomeOrder.add({
-    userId: { type: Types.Relationship, ref: 'user', required: true, index: true, label: '用户' },
-    deviceId: { type: Types.Relationship, ref: 'device', required: true, label: '设备名称' },
-    income: { type: Types.Number, required: true, label: '支付金额(分)'},
-    channel: { type: Types.Select, options: 'WXPAY', required: true, index: true, label: '支付方式'},
-    state: { type: Types.Select, options: 'OPEN, SUCCESS, FAIL', required: true, index: true, label: '状态'},
-    date: { type: Types.Datetime, required: true, default: Date.now, label: '支付日期'},
+tradePay.add({
+    createDate:             { type: Types.Datetime,     noedit: true, label: '创建日期'},
+
+    pointOrderId:           { type: Types.Relationship, noedit: true, ref: 'pointOrder', label: '领用订单' },
+    userId:                 { type: Types.Relationship, noedit: true, ref: 'user', label: '用户' },
+    partnerId:              { type: Types.Relationship, noedit: true, ref: 'partner', label: '合伙人' },
+    payout:                 { type: Types.Number,       noedit: true, label: '用户支付(分)'},
+    income:                 { type: Types.Number,       noedit: true, label: '平台提成(分)'},
+    type:                   { type: Types.Select,       noedit: true, options: [{ value: 'WECHAT', label: '微信支付' }], label: '支付类型'},
+
+    }, '微信信息', {
+    wechatInfo: {
+        transaction_id:     { type: Types.Text,         noedit: true },
+        total_fee:          { type: Types.Number,       noedit: true, label: '实付金额' },
+    },
 });
 
 
 /**
  * Registration
  */
-incomeOrder.defaultColumns = 'userId, deviceId, income, state, date';
-incomeOrder.register();
+tradePay.defaultColumns = 'pointOrderId, userId, partnerId, payout, income, type, createDate';
+tradePay.register();

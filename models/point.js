@@ -2,29 +2,45 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * Device Model
+ * point Model
  * ==========
  */
-var device = new keystone.List('device', {
-    label: '设备',
-    plural: '设备',
-    defaultSort: '-signDate'
+var point = new keystone.List('point', {
+    label: '点位',
+    plural: '点位',
+    defaultSort: '-createDate'
 });
 
-device.add({
-    devNo: { type: Types.Text, required: true, unique: true, initial: true, index: true, noedit: true, label: '设备编号' },
-    name: { type: Types.Text, required: true, initial: true, index: true, label: '设备名称' },
-    type: { type: Types.Select, options: 'ZHIJIN, JUANZHI', required: true, initial: true, index: true, label: '设备类型'},
-    city: { type: Types.Text, required: true, initial: true, index: true, label: '城市' },
-    partnerId: { type: Types.Relationship, ref: 'partner', required: true, initial: true, label: '所属合伙人' },
-    state: { type: Types.Select, options: 'OPEN, CLOSE, TEST', required: true, initial: true, label: '设备状态'},
-    income: { type: Types.Number, required: true, initial: true, label: '用户收费(分)'},
-    signDate: { type: Types.Datetime, required: true, default: Date.now, label: '注册日期'},
+point.add({
+    createDate:             { type: Types.Datetime,     noedit: true, default: new Date(), label: '创建日期'},
+
+    partnerId:              { type: Types.Relationship, required: true, initial: true, ref: 'partner', label: '所属合伙人' },
+    type:                   { type: Types.Select,       noedit: true, default: 'POINT', options: [{ value: 'POINT', label: '二维码点位' }, { value: 'DEVICE', label: '机器' }], label: '类型'},
+    state:                  { type: Types.Select,       required: true, default: 'OPEN', options: [{ value: 'OPEN', label: '可用' }, { value: 'DEPLOY', label: '运行中' }, { value: 'TEST', label: '测试中' }, { value: 'CLOSE', label: '关闭' }], label: '状态'},
+
+    }, '机器信息', {
+    deviceInfo: {
+        devNo:              { type: Types.Text,         noedit: true, label: '设备编码' },
+        type:               { type: Types.Select,       noedit: true, options: [{ value: 'JUANZHI', label: '卷纸机' }, { value: 'ZHIJIN', label: '纸巾机' }], label: '机器类型'},
+        state:              { type: Types.Text,         noedit: true, label: '设备状态' },
+    },
+
+    }, '部署信息', {
+    deployInfo: {
+        payout:             { type: Types.Number,       required: true, label: '点位支付用户计费(分)'},
+        name:               { type: Types.Text,         required: true, label: '点位名' },
+        shop:               { type: Types.Text,         required: true, label: '店铺名' },
+        operatorWechatId:   { type: Types.Text,         required: true, label: '运维通知人' },
+    },
+
+    info: {
+        descript:           { type: Types.Text,         noedit: true, label: '备注' },
+    }
 });
 
 
 /**
  * Registration
  */
-device.defaultColumns = 'devNo, type, name, partnerId, state, signDate';
-device.register();
+point.defaultColumns = 'partnerId, type, state, deviceInfo.devNo, createDate';
+point.register();

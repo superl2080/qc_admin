@@ -2,48 +2,28 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * system Model
+ * operatorConfig Model
  * ==========
  */
-var system = new keystone.List('system', {
+var operatorConfig = new keystone.List('operatorConfig', {
     label: '系统参数',
     plural: '系统参数',
     nocreate: true
 });
 
-system.add({
-    name: { type: Types.Text, label: '名称' },
-    component_verify_ticket: { type: Types.Text },
-    component_access_token: { type: Types.Text },
-    pre_auth_code: { type: Types.Text },
+operatorConfig.add(
+    '微信开发平台信息', {
+    wechatOpen: {
+        ticket:                 { type: Types.Text,         noedit: true },
+        access_token:           { type: Types.Text,         noedit: true },
+        expires_in:             { type: Types.Datetime,     noedit: true },
+    }
 });
 
 
 /**
  * Registration
  */
-system.defaultColumns = 'name';
-system.register();
+operatorConfig.defaultColumns = 'wechatOpen.ticket, wechatOpen.access_token, wechatOpen.expires_in';
+operatorConfig.register();
 
-
-exports.findOne = function(callback) {
-    system.model.findOne({ })
-    .exec(function (err, systemInfo) {
-        callback(err, systemInfo);
-    });
-}
-
-
-exports.updateAccessToken = function(component_access_token, callback) {
-    system.model.findOneAndUpdate({ }, {$set: {component_access_token: component_access_token}}, {new: true})
-    .exec(function (err, systemInfo) {
-        callback(err, systemInfo);
-    });
-}
-
-exports.updatePreAuthCode = function(pre_auth_code, callback) {
-    system.model.findOneAndUpdate({ }, {$set: {pre_auth_code: pre_auth_code}}, {new: true})
-    .exec(function (err, systemInfo) {
-        callback(err, systemInfo);
-    });
-}

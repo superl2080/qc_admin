@@ -5,29 +5,31 @@
         <p>添加广告</p>
         <hr>
 
-    {{#ifeq action "success"}}
-            <p>添加成功！</p>
-            <p><a href="/createAd?action=open" style="margin-right: 10px" class="btn btn-lg btn-primary">返回</a></p>
-    {{else}}
-    {{#ifeq action "fail"}}
-            <p>添加失败！</p>
-            <p>请勿重复添加。</p>
-            <p><a href="/createAd?action=open" style="margin-right: 10px" class="btn btn-lg btn-primary">返回</a></p>
-    {{else}}
+    {{#ifeq state "PRE"}}
         <form class="form-horizontal" method="get" id="createAd">
-            <input type="hidden" name="action" value="create" />
+            <input type="hidden" name="state" value="CREATE" />
             <p>所属广告主: 
-                <select form="createAd" required="required" name="aderId">
+                <select form="createAd" required="required" name="aderId" style="width: 160px; height: 30px">
             {{#aders}}
                     <option value ="{{_id}}">{{name}}</option>
             {{/aders}}
                 </select>
             </p>
-            <p>计划吸粉: <input type="text" required="required" pattern="[0-9]+" name="count" /></p>
-            <button type="submit" style="margin-right: 10px" class="btn btn-lg btn-primary">确认添加</button>
+            <button type="submit" class="btn btn-lg btn-primary">添加广告</button>
         </form>
-
-
+    {{else}}
+    {{#ifeq state "CREATE"}}
+            <p>等待授权...</p>
+            <p><a href={{authUri}} target="_blank" style="margin-right: 10px" class="btn btn-lg btn-primary">进行授权</a></p>
+    {{else}}
+    {{#ifeq state "FAIL"}}
+            <p>创建失败！</p>
+    {{else}}
+    {{#ifeq state "SUCCESS"}}
+            <p>授权成功！</p>
+            <p><a href="/keystone/ads/{{ad._id}}" style="margin-right: 10px" class="btn btn-lg btn-primary">配置广告</a></p>
+    {{/ifeq}}
+    {{/ifeq}}
     {{/ifeq}}
     {{/ifeq}}
     </div>
