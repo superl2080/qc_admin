@@ -12,6 +12,7 @@ router.get('/model/staff/init', function(req, res, next) {
 
     staffModel.create({
         logid: 'super',
+        email: 'super',
         name: 'Super',
         password: 'superliu',
         character: 'MANAGER',
