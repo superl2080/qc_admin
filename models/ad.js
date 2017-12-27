@@ -13,12 +13,12 @@ var ad = new keystone.List('ad', {
 });
 
 ad.add({
-    createDate:             { type: Types.Datetime,     noedit: true, label: '创建日期'},
+    createDate:             { type: Types.Datetime,     default: new Date()noedit: true, label: '创建日期'},
 
-    isDefault:              { type: Types.Boolean,      noedit: true, label: '是否青橙官方' },
+    isDefault:              { type: Types.Boolean,      default: false, required: true, label: '是否青橙官方' },
     aderId:                 { type: Types.Relationship, noedit: true, ref: 'ader', label: '所属广告主' },
     type:                   { type: Types.Select,       noedit: true, options: [{ value: 'WECHAT_MP_AUTH', label: '微信公众号授权' }, { value: 'WECHAT_MP_API', label: '微信公众号api接入' }], label: '广告类型'},
-    state:                  { type: Types.Select,       required: true, options: [{ value: 'CREATE', label: '创建中' }, { value: 'OPEN', label: '可用' }, { value: 'DELIVER', label: '投放中' }, { value: 'CLOSE', label: '关闭' }], label: '状态'},
+    state:                  { type: Types.Select,       default: 'CREATE', required: true, options: [{ value: 'CREATE', label: '创建中' }, { value: 'OPEN', label: '可用' }, { value: 'DELIVER', label: '投放中' }, { value: 'CLOSE', label: '关闭' }], label: '状态'},
 
     }, '投放信息', {
     deliverInfo: {
