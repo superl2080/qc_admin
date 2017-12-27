@@ -13,7 +13,7 @@ var ad = new keystone.List('ad', {
 });
 
 ad.add({
-    createDate:             { type: Types.Datetime,     default: new Date()noedit: true, label: '创建日期'},
+    createDate:             { type: Types.Datetime,     default: new Date(), noedit: true, label: '创建日期'},
 
     isDefault:              { type: Types.Boolean,      default: false, required: true, label: '是否青橙官方' },
     aderId:                 { type: Types.Relationship, noedit: true, ref: 'ader', label: '所属广告主' },
