@@ -34,10 +34,6 @@ staff.schema.virtual('canAccessKeystone').get(function () {
     return true;
 });
 
-staff.schema.virtual('email').get(function () {
-    return this.logid;
-});
-
 /**
  * Registration
  */
