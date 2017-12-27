@@ -12,7 +12,6 @@ exports = module.exports = function (req, res) {
         aderModel.GetHaveBalanceAders(null, (err, aders) => {
             locals.aders = aders;
             locals.ad = null;
-            locals.needAuth = false;
             locals.state = 'PRE';
 
             next(err);
@@ -28,6 +27,7 @@ exports = module.exports = function (req, res) {
                 } else {
                     locals.state = 'FAIL';
                 }
+                next(err);
             });
         } else {
             adModel.UpdateAd({ adId: locals.ad._Id }, (err, ad) => {
@@ -39,6 +39,7 @@ exports = module.exports = function (req, res) {
                 } else {
                     locals.state = 'FAIL';
                 }
+                next(err);
             });
         }
     });
