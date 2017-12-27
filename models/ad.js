@@ -24,10 +24,10 @@ ad.add({
     deliverInfo: {
         payout:             { type: Types.Number,       required: true, label: '扫码领取广告主计费(分)'},
         income:             { type: Types.Number,       required: true, label: '扫码领取平台提成(分)'},
-        count:              { type: Types.Number,       required: true, label: '计划吸粉数'},
-        partnerType:        { type: Types.Select,       required: true, options: [{ value: 'ALL', label: '全部' }, { value: 'WHITE', label: '白名单' }, { value: 'BLACK', label: '黑名单' }], label: '投放合伙人'},
+        count:              { type: Types.Number,       default: 0, required: true, label: '计划吸粉数'},
+        partnerType:        { type: Types.Select,       default: 'ALL', required: true, options: [{ value: 'ALL', label: '全部' }, { value: 'WHITE', label: '白名单' }, { value: 'BLACK', label: '黑名单' }], label: '投放合伙人'},
         partnerIds:         { type: Types.Relationship, ref: 'partner', many: true, label: '合伙人列表' },
-        userType:           { type: Types.Select,       required: true, options: [{ value: 'ALL', label: '全部' }, { value: 'WHITE', label: '白名单' }, { value: 'BLACK', label: '黑名单' }], label: '投放用户'},
+        userType:           { type: Types.Select,       default: 'ALL', required: true, options: [{ value: 'ALL', label: '全部' }, { value: 'WHITE', label: '白名单' }, { value: 'BLACK', label: '黑名单' }], label: '投放用户'},
         userTags:           { type: Types.TextArray,    label: '用户标签列表' },
     },
 
