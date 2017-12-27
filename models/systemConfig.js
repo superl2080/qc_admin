@@ -2,16 +2,16 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * operatorConfig Model
+ * systemConfig Model
  * ==========
  */
-var operatorConfig = new keystone.List('operatorConfig', {
+var systemConfig = new keystone.List('systemConfig', {
     label: '系统参数',
     plural: '系统参数',
     nocreate: true
 });
 
-operatorConfig.add(
+systemConfig.add(
     '微信开发平台信息', {
     wechatOpen: {
         ticket:                 { type: Types.Text,         noedit: true },
@@ -24,6 +24,6 @@ operatorConfig.add(
 /**
  * Registration
  */
-operatorConfig.defaultColumns = 'wechatOpen.ticket, wechatOpen.access_token, wechatOpen.expires_in';
-operatorConfig.register();
+systemConfig.defaultColumns = 'wechatOpen.ticket, wechatOpen.access_token, wechatOpen.expires_in';
+systemConfig.register();
 

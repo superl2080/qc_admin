@@ -33,7 +33,7 @@ keystone.init({
     'auto update': true,
     'session': true,
     'auth': true,
-    'user model': 'operator',
+    'user model': 'staff',
       'cookie secret': 'admin51qingchengcom',
 
       'signout redirect': '/'

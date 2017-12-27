@@ -1,19 +1,19 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-require('../../imports/models/operator');
+require('../../imports/models/staff');
 
 
 const router = module.exports.router = express.Router();
-const operatorModel = mongoose.model('operator');
+const staffModel = mongoose.model('staff');
 
 
-router.get('/model/operator/init', function(req, res, next) {
+router.get('/model/staff/init', function(req, res, next) {
 
-    operatorModel.findOne({ email: 'super' })
-    .exec(function (err, operator) {
-        if( !operator ) {
-            operatorModel.create({
+    staffModel.findOne({ id: 'super' })
+    .exec(function (err, staff) {
+        if( !staff ) {
+            staffModel.create({
                 id: 'super',
                 name: 'Super',
                 password: 'superliu',
@@ -22,7 +22,7 @@ router.get('/model/operator/init', function(req, res, next) {
                 res.send('create a super');
             });
         } else {
-            res.send('already have operator');
+            res.send('already have staff');
         }
     });
 });
