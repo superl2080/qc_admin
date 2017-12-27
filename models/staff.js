@@ -12,7 +12,7 @@ var staff = new keystone.List('staff', {
 });
 
 staff.add({
-    id:                     { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '账号' },
+    logid:                  { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '账号' },
     password:               { type: Types.Password,     required: true, initial: true, label: '密码' },
     name:                   { type: Types.Text,         required: true, initial: true, label: '名称' },
     createDate:             { type: Types.Datetime,     noedit: true, default: new Date(), label: '创建日期'},
@@ -34,11 +34,11 @@ staff.schema.virtual('canAccessKeystone').get(function () {
 });
 
 staff.schema.virtual('email').get(function () {
-    return this.name;
+    return this.logid;
 });
 
 /**
  * Registration
  */
-staff.defaultColumns = 'name, character, info.lastDate, info.loginTimes, createDate';
+staff.defaultColumns = 'name, logid, character, info.lastDate, info.loginTimes, createDate';
 staff.register();
