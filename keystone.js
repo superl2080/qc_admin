@@ -49,11 +49,11 @@ keystone.set('routes', require('./routes'));
 
 keystone.set('nav', {
     '用户管理': 'user',
-    '设备管理': ['deviceOrder', 'device', 'partner'],
-    '广告管理': ['adOrder', 'ad', 'ader'],
-    '支付记录': 'incomeOrder',
-    '员工管理': 'admin',
-    '系统参数': 'system',
+    '设备管理': ['pointOrder', 'point', 'partner'],
+    '广告管理': ['tradeAd', 'ad', 'ader'],
+    '支付记录': 'tradePay',
+    '员工管理': 'staff',
+    '系统参数': 'systemConfig',
 });
 
 keystone.start();
