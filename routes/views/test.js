@@ -10,23 +10,16 @@ const staffModel = mongoose.model('staff');
 
 router.get('/model/staff/init', function(req, res, next) {
 
-    staffModel.findOne({ id: 'super' })
-    .exec(function (err, staff) {
-        if( !staff ) {
-            staffModel.create({
-                logid: 'super',
-                name: 'Super',
-                password: 'superliu',
-                character: 'MANAGER',
-            }, (err, callback) => {
-                if( !err ) {
-                    res.send('create a super');
-                } else {
-                    res.send(err);
-                }
-            });
+    staffModel.create({
+        logid: 'super',
+        name: 'Super',
+        password: 'superliu',
+        character: 'MANAGER',
+    }, (err, callback) => {
+        if( !err ) {
+            res.send('create a super');
         } else {
-            res.send('already have staff');
+            res.send(err);
         }
     });
 });
