@@ -22,6 +22,7 @@ exports = module.exports = function (req, res) {
         if( !locals.ad ) {
             adModel.CreateAuthAd({ aderId: req.query.aderId }, (err, ad) => {
                 if( !err ) {
+                    locals.state = 'CREATE';
                     locals.ad = ad;
                     locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + ad._id.toString();
                 } else {
