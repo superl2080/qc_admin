@@ -18,7 +18,7 @@ ad.add({
     isDefault:              { type: Types.Boolean,      default: false, required: true, label: '是否青橙官方' },
     aderId:                 { type: Types.Relationship, noedit: true, ref: 'ader', label: '所属广告主' },
     type:                   { type: Types.Select,       noedit: true, options: [{ value: 'WECHAT_MP_AUTH', label: '微信公众号授权' }, { value: 'WECHAT_MP_API', label: '微信公众号api接入' }], label: '广告类型'},
-    state:                  { type: Types.Select,       default: 'CREATE', required: true, options: [{ value: 'CREATE', label: '创建中' }, { value: 'OPEN', label: '可用' }, { value: 'DELIVER', label: '投放中' }, { value: 'CLOSE', label: '关闭' }], label: '状态'},
+    state:                  { type: Types.Select,       default: 'CREATE', required: true, options: [{ value: 'CREATE', label: '创建中' }, { value: 'OPEN', label: '可用' }, { value: 'DELIVER', label: '投放中' }, { value: 'SUCESS', label: '完成' }, { value: 'CANCEL', label: '取消授权' }, { value: 'NO_BALANCE', label: '余额不足' }], label: '状态'},
 
     }, '投放信息', {
     deliverInfo: {
