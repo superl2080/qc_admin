@@ -33,6 +33,7 @@ pointOrder.add({
     }, '支付信息', {
     payInfo: {
         type:               { type: Types.Select,       noedit: true, options: [{ value: 'AD', label: '看广告' }, { value: 'PAY', label: '付款' }], label: '支付类型'},
+        lastDate:           { type: Types.Datetime,     noedit: true, label: '完成日期'},
         tradeAdId:          { type: Types.Relationship, noedit: true, ref: 'tradeAd', label: '广告记录' },
         tradePayId:         { type: Types.Relationship, noedit: true, ref: 'tradePay', label: '支付记录' },
     }

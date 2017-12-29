@@ -14,8 +14,8 @@ var systemConfig = new keystone.List('systemConfig', {
 systemConfig.add(
     '微信开发平台信息', {
     wechatOpen: {
-        ticket:                 { type: Types.Text,         noedit: true },
-        access_token:           { type: Types.Text,         noedit: true },
+        ticket:                 { type: Types.Textarea,     noedit: true },
+        access_token:           { type: Types.Textarea,     noedit: true },
         expires_in:             { type: Types.Datetime,     noedit: true },
     }
 });

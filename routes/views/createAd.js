@@ -19,21 +19,22 @@ exports = module.exports = function (req, res) {
     });
 
     view.on('get', { state: 'CREATE' }, function (next) {
-        if( !locals.ad ) {
+        if( !req.query.adId ) {
             adModel.CreateAuthAd({ aderId: req.query.aderId }, (err, ad) => {
                 if( !err ) {
                     locals.state = 'CREATE';
-                    locals.ad = ad;
-                    locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + ad._id.toString();
+                    res.redirect('http://' + req.headers.host + '/createAd?state=CREATE&aderId=' + req.query.aderId + '&adId=' + ad._id.toString());
                 } else {
                     locals.state = 'FAIL';
                 }
                 next(err);
             });
         } else {
-            adModel.UpdateAd({ adId: locals.ad._Id }, (err, ad) => {
+            adModel.GetAdById({ adId: req.query.adId }, (err, ad) => {
                 if( !err ) {
                     locals.ad = ad;
+                    locals.state = 'CREATE';
+                    locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + req.query.adId;
                     if( ad.state != 'CREATE' ) {
                         locals.state = 'SUCCESS';
                     }

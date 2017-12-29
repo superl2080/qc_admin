@@ -33,14 +33,16 @@ ad.add({
 
     }, '微信公众号授权-参数', {
     wechatMpAuthInfo: {
-        appid:              { type: Types.Text,         noedit: true },
-        qrcode_url:         { type: Types.Text,         noedit: true },
+        pre_auth_code:      { type: Types.Textarea,     noedit: true },
+        appid:              { type: Types.Textarea,     noedit: true },
+        qrcode_url:         { type: Types.Textarea,     noedit: true },
         auth:               { type: Types.Boolean,      noedit: true },
         service_type:       { type: Types.Number,       noedit: true },
         verify_type:        { type: Types.Number,       noedit: true },
-        access_token:       { type: Types.Text,         noedit: true },
+        access_token:       { type: Types.Textarea,     noedit: true },
         expires_in:         { type: Types.Datetime,     noedit: true },
-        refresh_token:      { type: Types.Text,         noedit: true },
+        refresh_token:      { type: Types.Textarea,     noedit: true },
+        head_img:           { type: Types.Textarea,     noedit: true },
         nick_name:          { type: Types.Text,         noedit: true },
         user_name:          { type: Types.Text,         noedit: true },
     },
