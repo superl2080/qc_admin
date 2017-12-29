@@ -23,7 +23,7 @@ exports = module.exports = function (req, res) {
             adModel.CreateAuthAd({ aderId: req.query.aderId }, (err, ad) => {
                 if( !err ) {
                     locals.state = 'CREATE';
-                    res.redirect('http://' + req.headers.host + '/createAd?state=CREATE&aderId=' + req.query.aderId + '&adId=' + ad._id.toString());
+                    return res.redirect('http://' + req.headers.host + '/createAd?state=CREATE&aderId=' + req.query.aderId + '&adId=' + ad._id.toString());
                 } else {
                     locals.state = 'FAIL';
                 }
