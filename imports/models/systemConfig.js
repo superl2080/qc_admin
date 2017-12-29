@@ -22,29 +22,29 @@ try {
 }
 
 
-const GetTicket = exports.GetTicket = (param, callback) => {
+const GetWechatOpen = exports.GetWechatOpen = (param, callback) => {
 
     systemConfigModel.findOne({ })
     .exec(function (err, systemConfig) {
-        if( !systemConfig ||
-            !systemConfig.wechatOpen ||
-            !systemConfig.wechatOpen.ticket ) {
-            callback(new Error('ticket is empty'));
+        if( err
+            || !systemConfig
+            || !systemConfig.wechatOpen ) {
+            callback(err || new Error('GetWechatOpen: wechatOpen is empty'));
         } else {
-            callback(null, systemConfig.wechatOpen.ticket);
+            callback(null, systemConfig.wechatOpen);
         }
     });
 }
 
-const UpdateTicket = exports.UpdateTicket = (newTicket, callback) => {
+const UpdateWechatOpenTicket = exports.UpdateWechatOpenTicket = (newTicket, callback) => {
     if( !newTicket ) {
-        callback(new Error('newTicket is empty'));
-        return ;
+        return callback(new Error('UpdateWechatOpenTicket: newTicket is empty'));
     }
 
     systemConfigModel.findOne({ })
     .exec(function (err, systemConfig) {
-        if( !systemConfig ) {
+        if( err
+            || !systemConfig ) {
             systemConfigModel.create({
                 wechatOpen: {
                     ticket: newTicket
@@ -56,3 +56,24 @@ const UpdateTicket = exports.UpdateTicket = (newTicket, callback) => {
         }
     });
 }
+
+const UpdateWechatOpenToken = exports.UpdateWechatOpenToken = (param, callback) => {
+    if( !param
+        || !param.access_token
+        || !param.expires_in ) {
+        return callback(new Error('UpdateWechatOpenToken: param is error'));
+    }
+
+    systemConfigModel.findOne({ })
+    .exec(function (err, systemConfig) {
+        if( err
+            || !systemConfig ) {
+            callback(err || new Error('UpdateWechatOpenToken: systemConfig is empty'));
+        } else {
+            systemConfig.wechatOpen.access_token = param.access_token;
+            systemConfig.wechatOpen.expires_in = param.expires_in;
+            systemConfig.save(callback);
+        }
+    });
+}
+
