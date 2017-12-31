@@ -2,7 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const adModel = require('../../imports/models/ad');
-const toolHelper = require('../../helpers/tool');
+const toolHelper = require('../../imports/helpers/tool');
 require('../../imports/models/staff');
 
 
