@@ -17,6 +17,7 @@ systemConfig.add(
         ticket:                 { type: Types.Textarea,     noedit: true },
         access_token:           { type: Types.Textarea,     noedit: true },
         expires_in:             { type: Types.Datetime,     noedit: true },
+        auto_reply:             { type: Types.Datetime,     require: true },
     }
 });
 
@@ -24,6 +25,6 @@ systemConfig.add(
 /**
  * Registration
  */
-systemConfig.defaultColumns = 'wechatOpen.ticket, wechatOpen.access_token, wechatOpen.expires_in';
+systemConfig.defaultColumns = 'wechatOpen.auto_reply, wechatOpen.ticket, wechatOpen.access_token, wechatOpen.expires_in';
 systemConfig.register();
 

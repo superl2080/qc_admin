@@ -20,8 +20,8 @@ partner.add({
         wechatId:           { type: Types.Text,         noedit: true, index: true, label: '微信openId' },
     },
 
+    isDefault:              { type: Types.Boolean,      default: false, required: true, label: '是否青橙官方' },
     balance:                { type: Types.Number,       required: true, initial: true, label: '待结算余额(分)'},
-    payout:                 { type: Types.Number,       required: true, initial: true, label: '点位支付用户计费(分)'},
     income:                 { type: Types.Number,       required: true, initial: true, label: '点位支付平台提成(分)'},
     character:              { type: Types.Select,       required: true, initial: true, options: [{ value: 'DAILI', label: '代理' }, { value: 'ZHITUI', label: '直推' }], label: '角色'},
 

@@ -66,5 +66,5 @@ ad.schema.virtual('name').get(function () {
 /**
  * Registration
  */
-ad.defaultColumns = 'aderId, type, name, count, payout, income, state, createDate';
+ad.defaultColumns = 'aderId, type, name, wechatMpAuthInfo.nick_name, count, payout, income, state, createDate';
 ad.register();
