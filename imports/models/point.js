@@ -5,11 +5,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const pointSchema = new mongoose.Schema({
 
-    createDate:             { type: Date,               default: new Date() },
+    createDate:             { $type: Date,               default: new Date() },
 
-    partnerId:              { type: ObjectId,           required: true, index: true },
-    type:                   { type: String,             required: true }, //'ZHIJIN', 'ZHIJINJI'
-    state:                  { type: String,             default: 'OPEN' }, //'OPEN', 'DEPLOY', 'TEST', 'CLOSE'
+    partnerId:              { $type: ObjectId,           required: true, index: true },
+    type:                   { $type: String,             required: true }, //'ZHIJIN', 'ZHIJINJI'
+    state:                  { $type: String,             default: 'OPEN' }, //'OPEN', 'DEPLOY', 'TEST', 'CLOSE'
 
     deviceInfo: {
         devNo:              String,
@@ -27,7 +27,7 @@ const pointSchema = new mongoose.Schema({
     info: {
         descript:           String
     }
-});
+}, { typeKey: '$type' });
 
 let pointModel = null;
 try {
@@ -54,7 +54,7 @@ const UpdateZhijinji = exports.UpdateZhijinji = (param, callback) => {
         || !param.type
         || !param.state
         || !param.partnerId ) {
-        returncallback(new Error('UpdateZhijinji: param is error'));
+        return callback(new Error('UpdateZhijinji: param is error'));
     }
 
     pointModel.findOne({ 'deviceInfo.devNo': param.devNo }, (err, point) => {
