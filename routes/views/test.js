@@ -34,7 +34,7 @@ router.get('/model/point/update/device1', function(req, res, next) {
         json: {
             devNo: 'YMJD20175173',
             type: 'ZHIJIN',
-            state: '正常'
+            state: 'normal'
         }
     }, function(err, result) {
         res.send(err || result);
@@ -48,7 +48,7 @@ router.get('/model/point/update/device2', function(req, res, next) {
         json: {
             devNo: 'YMJD20175173',
             type: 'JUANZHI',
-            state: '缺纸'
+            state: 'empty'
         }
     }, function(err, result) {
         res.send(err || result);
