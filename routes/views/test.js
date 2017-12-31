@@ -1,8 +1,9 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-require('../../imports/models/staff');
 const adModel = require('../../imports/models/ad');
+const toolHelper = require('../../helpers/tool');
+require('../../imports/models/staff');
 
 
 const router = module.exports.router = express.Router();
@@ -26,9 +27,30 @@ router.get('/model/staff/init', function(req, res, next) {
     });
 });
 
-router.get('/model/ad/create', function(req, res, next) {
+router.get('/model/point/update/device1', function(req, res, next) {
 
-    adModel.CreateAuthAd({ aderId: '5a43a57329ece71d244b243f' }, (err, ad) => {
-        res.send(err);
+    toolHelper.PostJson({
+        url: process.env.SERVICE_URL + '/device/update',
+        json: {
+            devNo: 'YMJD20175173',
+            type: 'ZHIJIN',
+            state: '正常'
+        }
+    }, function(err, result) {
+        res.send(err || result);
+    });
+});
+
+router.get('/model/point/update/device2', function(req, res, next) {
+
+    toolHelper.PostJson({
+        url: process.env.SERVICE_URL + '/device/update',
+        json: {
+            devNo: 'YMJD20175173',
+            type: 'JUANZHI',
+            state: '缺纸'
+        }
+    }, function(err, result) {
+        res.send(err || result);
     });
 });
