@@ -17,7 +17,7 @@ systemConfig.add(
         ticket:                 { type: Types.Textarea,     noedit: true },
         access_token:           { type: Types.Textarea,     noedit: true },
         expires_in:             { type: Types.Datetime,     noedit: true },
-        auto_reply:             { type: Types.Datetime,     require: true },
+        auto_reply:             { type: Types.Text,         require: true },
     }
 });
 
