@@ -52,7 +52,6 @@ router.get('/3', function(req, res, next) {
             authorizer_refresh_token: 'refreshtoken@@@-6b-_ZbXMwthfQJTb8Ai6T9IubTtysMqOZtmG5QNBn4'
         }
     }, function(err, result) {
-        console.log(result);
         res.send(result);
     });
     
@@ -62,7 +61,7 @@ router.get('/4', function(req, res, next) {
 
     toolHelper.PostJson({
         url: 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='
-        + '5_-HF2SgmiCriTKwLQIzaTsnjYcX_tbXVstn-t7JvMOeiMMS_CNhM_fpK7Oxy1CUFJwQtcKCxEsK_B6J7pb5etpuHSopSFDljrCAY7Q24BhTCsNaLKW6MGNQ4rg8iJaq26p6BOyFS_rJj1h25GVNZfAEDPHT',
+        + '5_QC27vXs6RbrzjR1RJxq9znnOE5Sna3nDcq4SXouhcwf49gULTvVB_McOsVJrL1AlH2RgAl9vj3rvu09OVsNe7FftEQDRqDKCO-gX7-ERrJ6p7V3rVhxiO1fb93Y4gwoKidNTejAAjqvJIUsYZQJaAGDKBU',
         json: {
             expire_seconds: 7200,
             action_name: 'QR_STR_SCENE',
@@ -73,7 +72,6 @@ router.get('/4', function(req, res, next) {
             }
         }
     }, function(err, result) {
-        console.log(result);
         res.send(result);
     });
     
