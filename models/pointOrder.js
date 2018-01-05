@@ -18,7 +18,7 @@ pointOrder.add({
     userId:                 { type: Types.Relationship, noedit: true, ref: 'user', label: '消费用户' },
     pointId:                { type: Types.Relationship, noedit: true, ref: 'point', label: '消费点位' },
     payout:                 { type: Types.Number,       noedit: true, label: '点位支付待付款(分)'},
-    state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '开放' }, { value: 'SUCCESS', label: '完成领取' }, { value: 'FAIL', label: '失败' }], label: '状态'},
+    state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '开放' }, { value: 'SUCCESS', label: '完成领取' }, { value: 'FAIL', label: '失败' }, { value: 'CANCEL', label: '取消' }], label: '状态'},
 
     }, '广告信息', {
     adInfo: {
