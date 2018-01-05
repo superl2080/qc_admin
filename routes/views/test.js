@@ -79,7 +79,7 @@ router.get('/4', function(req, res, next) {
 
 router.get('/5', function(req, res, next) {
 
-    res.redirect('http://' + process.env.SERVICE_URL + '/wechat/mp/oAuth?redirect_uri=' + encodeURIComponent('http://' + req.headers.host + '/test/6'));
+    res.redirect(process.env.SERVICE_URL + '/wechat/mp/oAuth?redirect_uri=' + encodeURIComponent('http://' + req.headers.host + '/test/6'));
 });
 
 router.get('/6', function(req, res, next) {
