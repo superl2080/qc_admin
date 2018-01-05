@@ -45,7 +45,7 @@ router.get('/3', function(req, res, next) {
 
     toolHelper.PostJson({
         url: 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='
-        + '5_-HF2SgmiCriTKwLQIzaTsnjYcX_tbXVstn-t7JvMOeiMMS_CNhM_fpK7Oxy1CUFJwQtcKCxEsK_B6J7pb5etpuHSopSFDljrCAY7Q24BhTCsNaLKW6MGNQ4rg8iJaq26p6BOyFS_rJj1h25GVNZfAEDPHT'
+        + '5_-HF2SgmiCriTKwLQIzaTsnjYcX_tbXVstn-t7JvMOeiMMS_CNhM_fpK7Oxy1CUFJwQtcKCxEsK_B6J7pb5etpuHSopSFDljrCAY7Q24BhTCsNaLKW6MGNQ4rg8iJaq26p6BOyFS_rJj1h25GVNZfAEDPHT',
         json: {
             expire_seconds: 7200,
             action_name: 'QR_STR_SCENE',
