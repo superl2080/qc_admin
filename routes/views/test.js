@@ -44,17 +44,31 @@ router.get('/2', function(req, res, next) {
 router.get('/3', function(req, res, next) {
 
     toolHelper.PostJson({
-        url: 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=5_mjPE-AJXDnLjCv4nnItz_79wvPK2fF1UvhHcE4t7By1ANDCmg--21jCve8wXMfnelYOsHxaJ0KlhcBvLWCuinq_QAZSkpRjH6mWO6ff5CnahxsdizXaC4ldkdP3Bo7VOJ741tLEjDKWcSunFWGIeAGAZJL',
+        url: 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='
+        + '5_-HF2SgmiCriTKwLQIzaTsnjYcX_tbXVstn-t7JvMOeiMMS_CNhM_fpK7Oxy1CUFJwQtcKCxEsK_B6J7pb5etpuHSopSFDljrCAY7Q24BhTCsNaLKW6MGNQ4rg8iJaq26p6BOyFS_rJj1h25GVNZfAEDPHT'
         json: {
-            component_appid: process.env.WECHAT_OPEN_APP_ID,
-            authorizer_appid: 'wx456a82590979bc02',
-            authorizer_refresh_token: 'refreshtoken@@@NO7u_Rwz51QbwSlDJ7rk42RbwZLdgxnSFunI9S-wgK0'
+            expire_seconds: 7200,
+            action_name: 'QR_STR_SCENE',
+            action_info: {
+                scene: {
+                    scene_str: 'TEST3'
+                }
+            }
         }
     }, function(err, result) {
-        console.log(result);
-        result = JSON.parse(result);
         console.log(result);
         res.send(result);
     });
     
 });
+
+router.get('/4', function(req, res, next) {
+
+    res.redirect('http://' + process.env.SERVICE_URL + '/wechat/mp/oAuth?redirect_uri=' + encodeURIComponent('http://' + req.headers.host + '/test/5'));
+});
+
+router.get('/5', function(req, res, next) {
+
+    res.send('Hello!');
+});
+
