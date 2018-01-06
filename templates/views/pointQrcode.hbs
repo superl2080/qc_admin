@@ -1,0 +1,27 @@
+{{!< default}}
+<div class="container">
+    <div class="jumbotron"><img src="/images/logo.png" width="86">
+        <hr>
+        <p>查看点位二维码</p>
+        <hr>
+
+    {{#ifeq state "PRE"}}
+        <form class="form-horizontal" method="get" id="pointQrcode">
+            <input type="hidden" name="state" value="CREATE" />
+            <p>选择点位: 
+                <select form="pointQrcode" required="required" name="pointId" style="width: 160px; height: 30px">
+            {{#points}}
+                    <option value ="{{_id}}">{{deployInfo.shop + ' - ' + deployInfo.name}}</option>
+            {{/points}}
+                </select>
+            </p>
+            <button type="submit" class="btn btn-lg btn-primary">查看二维码</button>
+        </form>
+    {{else}}
+    {{#ifeq state "CREATE"}}
+        <img src=<%= qrcodeUrl %> />
+        <p><a href='/pointQrcode' style="margin-right: 10px" class="btn btn-lg btn-primary">返回</a></p>
+    {{/ifeq}}
+    {{/ifeq}}
+    </div>
+</div>

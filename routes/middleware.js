@@ -14,6 +14,7 @@ exports.initLocals = function (req, res, next) {
         res.locals.navLinks = [
             { label: '首页', key: 'home', href: '/' },
             { label: '创建广告', key: 'createAd', href: '/createAd' },
+            { label: '查看点位二维码', key: 'pointQrcode', href: '/pointQrcode' },
         ];
     }
     res.locals.user = req.user;

@@ -23,4 +23,5 @@ exports = module.exports = function (app) {
     app.get('/createAd', middleware.requireUser);
     app.get('/createAd', routes.views.createAd);
 
+    app.get('/pointQrcode', routes.views.pointQrcode);
 };

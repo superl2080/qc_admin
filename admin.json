@@ -5,6 +5,7 @@
             "script": "keystone.js",
             "instances": "1",
             "env": {
+                "SIT_URL": "http://sit.51qingcheng.com",
                 "SERVICE_URL": "http://service.51qingcheng.com",
                 "PORT": 3002,
                 "MONGO_URL": "mongodb://localhost/qingcheng",
