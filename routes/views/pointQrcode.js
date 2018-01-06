@@ -24,7 +24,6 @@ exports = module.exports = function (req, res) {
             if( !err ) {
                 locals.state = 'CREATE';
                 locals.qrcodeUrl = url;
-                return res.redirect('http://' + req.headers.host + '/pointQrcode?state=CREATE');
             } else {
                 locals.state = 'PRE';
             }
@@ -32,7 +31,5 @@ exports = module.exports = function (req, res) {
         });
     });
 
-
-    
     view.render('pointQrcode');
 };
