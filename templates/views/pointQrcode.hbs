@@ -19,7 +19,7 @@
         </form>
     {{else}}
     {{#ifeq state "CREATE"}}
-        <img src={{qrcodeUrl}} />
+        <img src={{qrcodeUrl}} style="width: 320px; height: 320px" />
         <p><a href='/pointQrcode' style="margin-right: 10px" class="btn btn-lg btn-primary">返回</a></p>
     {{/ifeq}}
     {{/ifeq}}
