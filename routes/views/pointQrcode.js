@@ -19,7 +19,7 @@ exports = module.exports = function (req, res) {
 
     view.on('get', { state: 'CREATE' }, function (next) {
         qrcodeApi.GetQrcodeImageUrl({
-            url: process.env.SIT_URL + '/scan/point/' + req.query.pointId.toString()
+            url: process.env.SIT_URL + '/scan/point/' + req.query.pointId
         }, (err, url) => {
             if( !err ) {
                 locals.state = 'CREATE';
