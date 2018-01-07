@@ -92,8 +92,18 @@ router.post('/100', function(req, res, next) {
     console.log(req.body);
     res.send({
         auth: false,
-        appid: wx1676ae64c9ab902c,
+        appid: 'wx1676ae64c9ab902c',
         qrcode_url: 'http://open.weixin.qq.com/qr/code?username=gh_38c6917c1dd1'
+    });
+});
+
+router.post('/102', function(req, res, next) {
+
+    console.log(req.body);
+    res.send({
+        auth: true,
+        appid: 'wx1676ae64c9ab902c',
+        qrcode_url: 'http://weixin.qq.com/q/02aegn1oVzfzi1qICj1qcv'
     });
 });
 
