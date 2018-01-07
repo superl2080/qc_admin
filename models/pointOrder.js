@@ -23,11 +23,9 @@ pointOrder.add({
     }, '广告信息', {
     adInfo: {
         adId:               { type: Types.Relationship, noedit: true, ref: 'ad', label: '投放广告' },
-        wechatMpApiInfo: {
-            appid:          { type: Types.Text,         noedit: true, label: '广告appid' },
-            qrcode_url:     { type: Types.Text,         noedit: true, label: '广告二维码' },
-            auth:           { type: Types.Boolean,      noedit: true, label: '认证服务号' },
-        },
+        appid:              { type: Types.Text,         noedit: true, label: '广告appid' },
+        qrcode_url:         { type: Types.Text,         noedit: true, label: '广告二维码' },
+        auth:               { type: Types.Boolean,      noedit: true, label: '认证服务号' },
     },
 
     }, '支付信息', {
