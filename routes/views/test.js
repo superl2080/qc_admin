@@ -87,6 +87,19 @@ router.get('/6', function(req, res, next) {
     res.send('Hello!');
 });
 
+router.get('/7', function(req, res, next) {
+
+    toolHelper.PostJson({
+        url: 'http://serviceytest.51qingcheng.com/channel/subscribe',
+        json: {
+            userId: '5a52260469993536705ff464',
+            appid: 'wx1676ae64c9ab902c'
+        }
+    }, function(err, result) {
+        res.send(result);
+    });
+});
+
 router.post('/100', function(req, res, next) {
 
     console.log(req.body);
