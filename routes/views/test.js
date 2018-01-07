@@ -87,4 +87,14 @@ router.get('/6', function(req, res, next) {
     res.send('Hello!');
 });
 
+router.post('/100', function(req, res, next) {
+
+    console.log(req.body);
+    res.send({
+        auth: false,
+        appid: wx1676ae64c9ab902c,
+        qrcode_url: 'http://open.weixin.qq.com/qr/code?username=gh_38c6917c1dd1'
+    });
+});
+
 
