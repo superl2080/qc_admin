@@ -1,123 +1,23 @@
 
-const express = require('express');
-const mongoose = require('mongoose');
-const adModel = require('../../imports/models/ad');
-const toolHelper = require('../../imports/helpers/tool');
-require('../../imports/models/staff');
+var keystone = require('keystone');
 
+staff = keystone.list('staff');
+ 
 
-const router = module.exports.router = express.Router();
-const staffModel = mongoose.model('staff');
+const test1 = async (req, res, next) => {
 
-
-router.get('/1', function(req, res, next) {
-
-    staffModel.create({
-        logid: 'super',
+    const result = await staff.model.create({
         email: 'super',
         name: 'Super',
         password: 'superliu',
         character: 'MANAGER',
-    }, (err, callback) => {
-        if( !err ) {
-            res.send('create a super');
-        } else {
-            res.send(err);
-        }
     });
-});
+    res.send(result);
+}
 
-router.get('/2', function(req, res, next) {
+exports = module.exports = function (app) {
 
-    toolHelper.PostJson({
-        url: process.env.SERVICE_URL + '/device/update',
-        json: {
-            devNo: 'YMJD20175173',
-            type: 'ZHIJIN',
-            state: '正常'
-        }
-    }, function(err, result) {
-        res.send(err || result);
-    });
-});
+    app.get('/test/1', test1);
 
-router.get('/3', function(req, res, next) {
-
-    toolHelper.PostJson({
-        url: 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token='
-        + '5_mjPE-AJXDnLjCv4nnItz_79wvPK2fF1UvhHcE4t7By1ANDCmg--21jCve8wXMfnelYOsHxaJ0KlhcBvLWCuinq_QAZSkpRjH6mWO6ff5CnahxsdizXaC4ldkdP3Bo7VOJ741tLEjDKWcSunFWGIeAGAZJL',
-        json: {
-            component_appid: process.env.WECHAT_OPEN_APP_ID,
-            authorizer_appid: 'wx1676ae64c9ab902c',
-            authorizer_refresh_token: 'refreshtoken@@@-6b-_ZbXMwthfQJTb8Ai6T9IubTtysMqOZtmG5QNBn4'
-        }
-    }, function(err, result) {
-        res.send(result);
-    });
-    
-});
-
-router.get('/4', function(req, res, next) {
-
-    toolHelper.PostJson({
-        url: 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='
-        + '5_QC27vXs6RbrzjR1RJxq9znnOE5Sna3nDcq4SXouhcwf49gULTvVB_McOsVJrL1AlH2RgAl9vj3rvu09OVsNe7FftEQDRqDKCO-gX7-ERrJ6p7V3rVhxiO1fb93Y4gwoKidNTejAAjqvJIUsYZQJaAGDKBU',
-        json: {
-            expire_seconds: 7200,
-            action_name: 'QR_STR_SCENE',
-            action_info: {
-                scene: {
-                    scene_str: 'TEST4'
-                }
-            }
-        }
-    }, function(err, result) {
-        res.send(result);
-    });
-    
-});
-
-router.get('/5', function(req, res, next) {
-
-    res.redirect(process.env.SERVICE_URL + '/wechat/mp/oAuth?redirect_uri=' + encodeURIComponent('http://' + req.headers.host + '/test/6'));
-});
-
-router.get('/6', function(req, res, next) {
-
-    res.send('Hello!');
-});
-
-router.get('/7', function(req, res, next) {
-
-    toolHelper.PostJson({
-        url: 'http://servicetest.51qingcheng.com/channel/subscribe',
-        json: {
-            userId: '5a52260469993536705ff464',
-            appid: 'wx1676ae64c9ab902c'
-        }
-    }, function(err, result) {
-        res.send(result);
-    });
-});
-
-router.post('/100', function(req, res, next) {
-
-    console.log(req.body);
-    res.send({
-        auth: false,
-        appid: 'wx1676ae64c9ab902c',
-        qrcode_url: 'http://open.weixin.qq.com/qr/code?username=gh_38c6917c1dd1'
-    });
-});
-
-router.post('/102', function(req, res, next) {
-
-    console.log(req.body);
-    res.send({
-        auth: true,
-        appid: 'wx1676ae64c9ab902c',
-        qrcode_url: 'http://weixin.qq.com/q/02aegn1oVzfzi1qICj1qcv'
-    });
-});
-
+};
 

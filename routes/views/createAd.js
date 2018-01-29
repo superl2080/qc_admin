@@ -1,6 +1,6 @@
 var keystone = require('keystone');
-var aderModel = require('../../imports/models/ader');
-var adModel = require('../../imports/models/ad');
+ad = keystone.list('ad');
+ader = keystone.list('ader');
 
 exports = module.exports = function (req, res) {
 
@@ -8,41 +8,34 @@ exports = module.exports = function (req, res) {
     var locals = res.locals;
     locals.section = 'createAd';
 
-    view.on('init', function (next) {
-        aderModel.GetHaveBalanceAders(null, (err, aders) => {
-            locals.aders = aders;
-            locals.ad = null;
-            locals.state = 'PRE';
-
-            next(err);
-        });
+    view.on('init', async function (next) {
+        const aders = await ader.model.find({ balance: { $gt: 100 } }).exec();
+        locals.aders = aders;
+        locals.ad = null;
+        locals.state = 'PRE';
     });
 
-    view.on('get', { state: 'CREATE' }, function (next) {
+    view.on('get', { state: 'CREATE' }, async function (next) {
         if( !req.query.adId ) {
-            adModel.CreateAuthAd({ aderId: req.query.aderId }, (err, ad) => {
-                if( !err ) {
-                    locals.state = 'CREATE';
-                    return res.redirect('http://' + req.headers.host + '/createAd?state=CREATE&aderId=' + req.query.aderId + '&adId=' + ad._id.toString());
-                } else {
-                    locals.state = 'FAIL';
+            const selectAder = await ader.model.findById(req.query.aderId);
+            const newAd = await ad.model.create({ 
+                aderId: selectAder._id,
+                type: 'WECHAT_MP_AUTH',
+                deliverInfo: {
+                    payout: selectAder.payout,
                 }
-                next(err);
             });
+            locals.state = 'CREATE';
+            return res.redirect('http://' + req.headers.host + '/createAd?state=CREATE&aderId=' + req.query.aderId + '&adId=' + newAd._id.toString());
+
         } else {
-            adModel.GetAdById({ adId: req.query.adId }, (err, ad) => {
-                if( !err ) {
-                    locals.ad = ad;
-                    locals.state = 'CREATE';
-                    locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + req.query.adId;
-                    if( ad.state != 'CREATE' ) {
-                        locals.state = 'SUCCESS';
-                    }
-                } else {
-                    locals.state = 'FAIL';
-                }
-                next(err);
-            });
+            const newAd = await ad.model.findById(req.query.adId);
+            locals.ad = newAd;
+            locals.state = 'CREATE';
+            locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + req.query.adId;
+            if( newAd.state != 'CREATE' ) {
+                locals.state = 'SUCCESS';
+            }
         }
     });
 

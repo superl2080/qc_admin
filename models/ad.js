@@ -12,7 +12,7 @@ var ad = new keystone.List('ad', {
 });
 
 ad.add({
-    createDate:             { type: Types.Datetime,     default: new Date(), noedit: true, label: '创建日期'},
+    createDate:             { type: Types.Datetime,     default: Date.now, noedit: true, label: '创建日期'},
 
     isDefault:              { type: Types.Boolean,      noedit: true, default: false, label: '是否青橙官方' },
     aderId:                 { type: Types.Relationship, initial: true, ref: 'ader', label: '所属广告主' },
@@ -22,7 +22,6 @@ ad.add({
     }, '投放信息', {
     deliverInfo: {
         payout:             { type: Types.Number,       default: 50, label: '扫码领取广告主计费(分)'},
-        income:             { type: Types.Number,       default: 10, label: '扫码领取平台提成(分)'},
         priority:           { type: Types.Number,       default: 10, label: '优先度(大值优先)'},
         count:              { type: Types.Number,       default: 0, label: '计划吸粉数'},
         partnerType:        { type: Types.Select,       default: 'ALL', required: true, options: [{ value: 'ALL', label: '全部' }, { value: 'WHITE', label: '白名单' }, { value: 'BLACK', label: '黑名单' }], label: '投放合伙人'},
@@ -35,21 +34,20 @@ ad.add({
     wechatMpAuthInfo: {
         pre_auth_code:      { type: Types.Textarea,     noedit: true },
         appid:              { type: Types.Textarea,     noedit: true },
+        user_name:          { type: Types.Text,         noedit: true },
         qrcode_url:         { type: Types.Textarea,     noedit: true },
-        auth:               { type: Types.Boolean,      noedit: true },
-        service_type:       { type: Types.Number,       noedit: true },
-        verify_type:        { type: Types.Number,       noedit: true },
         access_token:       { type: Types.Textarea,     noedit: true },
         expires_in:         { type: Types.Datetime,     noedit: true },
         refresh_token:      { type: Types.Textarea,     noedit: true },
         head_img:           { type: Types.Textarea,     noedit: true },
         nick_name:          { type: Types.Text,         noedit: true },
-        user_name:          { type: Types.Text,         noedit: true },
-    },
+        service_type:       { type: Types.Number,       noedit: true },
+        verify_type:        { type: Types.Number,       noedit: true },
+     },
 
     }, '微信公众号api接入-参数', {
     wechatMpApiInfo: {
-        channel:            { type: Types.Select,       options: [{ value: 'YOUFENTONG', label: '优粉通' }, { value: 'YUNDAI', label: '云袋' }], label: 'api渠道'},
+        adChannelId:        { type: Types.Relationship, ref: 'configAdChannel', many: true, label: '广告渠道' },
     }
 });
 
