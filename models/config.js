@@ -19,7 +19,7 @@ configAdChannel.add(
 /**
  * Registration
  */
-configAdChannel.defaultColumns = 'name';
+configAdChannel.defaultColumns = 'name, url';
 configAdChannel.register();
 
 /**
@@ -40,7 +40,7 @@ configOther.add(
 /**
  * Registration
  */
-configOther.defaultColumns = 'ticket, access_token, expires_in';
+configOther.defaultColumns = 'deviceUrl';
 configOther.register();
 
 
@@ -63,7 +63,7 @@ configPartnerDeduct.add(
 /**
  * Registration
  */
-configPartnerDeduct.defaultColumns = 'ticket, access_token, expires_in';
+configPartnerDeduct.defaultColumns = 'character, percent';
 configPartnerDeduct.register();
 
 
