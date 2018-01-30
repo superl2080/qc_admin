@@ -18,8 +18,6 @@ staff.add({
     createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
 
     character:              { type: Types.Select,       required: true, initial: true, options: [{ value: 'MANAGER', label: '管理员' }, { value: 'NORMAL', label: '职员' }], label: '角色'},
-
-    }
 });
 
 // Provide access to Keystone
