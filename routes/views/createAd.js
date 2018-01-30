@@ -13,6 +13,7 @@ exports = module.exports = function (req, res) {
         locals.aders = aders;
         locals.ad = null;
         locals.state = 'PRE';
+        next();
     });
 
     view.on('get', { state: 'CREATE' }, async function (next) {
@@ -37,6 +38,7 @@ exports = module.exports = function (req, res) {
                 locals.state = 'SUCCESS';
             }
         }
+        next();
     });
 
 

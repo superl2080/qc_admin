@@ -15,6 +15,7 @@ exports = module.exports = function (req, res) {
         }).exec();
         locals.points = points;
         locals.state = 'PRE';
+        next();
     });
 
     view.on('get', { state: 'CREATE' }, async function (next) {
@@ -28,7 +29,7 @@ exports = module.exports = function (req, res) {
 
         locals.state = 'CREATE';
         locals.qrcodeUrl = url;
-
+        next();
     });
 
     view.render('pointQrcode');
