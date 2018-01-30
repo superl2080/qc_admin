@@ -15,7 +15,7 @@ point.add({
     createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
 
     partnerId:              { type: Types.Relationship, required: true, initial: true, ref: 'partner', label: '所属合伙人' },
-    type:                   { type: Types.Select,       noedit: true, default: 'ZHIJIN', options: [{ value: 'POINT', label: '点位' }, { value: 'DEVICE', label: '机器' }], label: '类型'},
+    type:                   { type: Types.Select,       noedit: true, default: 'POINT', options: [{ value: 'POINT', label: '点位' }, { value: 'DEVICE', label: '机器' }], label: '类型'},
     state:                  { type: Types.Select,       required: true, default: 'OPEN', options: [{ value: 'OPEN', label: '可用' }, { value: 'DEPLOY', label: '运行中' }, { value: 'TEST', label: '测试中' }, { value: 'CLOSE', label: '关闭' }], label: '状态'},
 
     }, '机器信息', {
