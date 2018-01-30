@@ -15,7 +15,7 @@ var ader = new keystone.List('ader', {
 
 ader.add({
     name:                   { type: Types.Text,         required: true, initial: true, label: '名称' },
-    createDate:             { type: Types.Datetime,     noedit: true, Date.now, label: '创建日期'},
+    createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
 
     balance:                { type: Types.Number,       required: true, initial: true, label: '账户余额(分)'},
     payout:                 { type: Types.Number,       required: true, initial: true, label: '扫码领取广告主计费(分)'},
