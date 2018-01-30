@@ -14,6 +14,7 @@ configAdChannel.add(
     '广告渠道信息', {
     name:                       { type: Types.Text,         require: true, initial: true },
     url:                        { type: Types.Textarea,     require: true, initial: true },
+    bid:                        { type: Types.Text },
 });
 
 /**
