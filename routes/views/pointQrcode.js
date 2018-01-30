@@ -21,15 +21,16 @@ exports = module.exports = function (req, res) {
     view.on('get', { state: 'CREATE' }, async function (next) {
 
         const pointUrl = process.env.SIT_URL + '/scan/point/' + req.query.pointId;
-        const result = await request.get({
+        request.get({
             url: 'https://cli.im/api/qrcode/code?text=' + pointUrl + '&mhid=skTHBF3tnJ4hMHctLdZVOaI'
-        });
-        var $ = cheerio.load(result);
-        const url = 'http:' + $('img').attr('src');
+        }, (err, ret, body) => {
+            var $ = cheerio.load(body);
+            const url = 'http:' + $('img').attr('src');
 
-        locals.state = 'CREATE';
-        locals.qrcodeUrl = url;
-        next();
+            locals.state = 'CREATE';
+            locals.qrcodeUrl = url;
+            next();
+        });
     });
 
     view.render('pointQrcode');
