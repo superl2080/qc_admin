@@ -52,7 +52,7 @@ keystone.set('nav', {
     '设备管理': ['order', 'point', 'partner'],
     '广告管理': ['ad', 'ader'],
     '员工管理': 'staff',
-    '系统参数': 'config',
+    '系统参数': ['configAdChannel', 'configOther', 'configPartnerDeduct', 'configWechatOpen'],
 });
 
 keystone.start();

@@ -5,7 +5,7 @@ var Types = keystone.Field.Types;
  * pointOrder Model
  * ==========
  */
-var pointOrder = new keystone.List('pointOrder', {
+var pointOrder = new keystone.List('order', {
     label: '订单',
     plural: '订单',
     nocreate: true,
