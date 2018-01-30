@@ -12,7 +12,8 @@ var staff = new keystone.List('staff', {
 });
 
 staff.add({
-    email:                  { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '账号' },
+    logid:                  { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '账号' },
+    email:                  { type: Types.Text,         noedit: true, required: true, index: true, unique: true, initial: true, label: '同账号' },
     password:               { type: Types.Password,     required: true, initial: true, label: '密码' },
     name:                   { type: Types.Text,         required: true, initial: true, label: '名称' },
     createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
