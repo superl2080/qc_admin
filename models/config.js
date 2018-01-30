@@ -28,8 +28,7 @@ configAdChannel.register();
  */
 var configOther = new keystone.List('configOther', {
     label: '其他设置',
-    plural: '其他设置',
-    nocreate: true
+    plural: '其他设置'
 });
 
 configOther.add(
@@ -56,8 +55,8 @@ var configPartnerDeduct = new keystone.List('configPartnerDeduct', {
 
 configPartnerDeduct.add(
     '合伙收益信息', {
-    character:                  { type: Types.Text,         require: true },
-    percent:                    { type: Types.Number,       require: true },
+    character:                  { type: Types.Text,         require: true, initial: true },
+    percent:                    { type: Types.Number,       require: true, initial: true },
 });
 
 
