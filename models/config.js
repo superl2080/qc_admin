@@ -12,8 +12,8 @@ var configAdChannel = new keystone.List('configAdChannel', {
 
 configAdChannel.add(
     '广告渠道信息', {
-    name:                       { type: Types.Text,         require: true },
-    url:                        { type: Types.Textarea,     require: true },
+    name:                       { type: Types.Text,         require: true, initial: true },
+    url:                        { type: Types.Textarea,     require: true, initial: true },
 });
 
 /**
@@ -28,7 +28,8 @@ configAdChannel.register();
  */
 var configOther = new keystone.List('configOther', {
     label: '其他设置',
-    plural: '其他设置'
+    plural: '其他设置',
+    nocreate: true
 });
 
 configOther.add(
@@ -72,8 +73,9 @@ configPartnerDeduct.register();
  * ==========
  */
 var configWechatOpen = new keystone.List('configWechatOpen', {
-    label: '广告渠道',
-    plural: '广告渠道'
+    label: '微信开发平台',
+    plural: '微信开发平台',
+    nocreate: true
 });
 
 configWechatOpen.add(
