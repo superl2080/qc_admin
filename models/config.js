@@ -35,13 +35,14 @@ var configOther = new keystone.List('configOther', {
 configOther.add(
     '其他设置信息', {
     deviceUrl:                  { type: Types.Textarea,     require: true },
+    auto_reply:                 { type: Types.Text,         require: true },
 });
 
 
 /**
  * Registration
  */
-configOther.defaultColumns = 'deviceUrl';
+configOther.defaultColumns = 'deviceUrl, auto_reply';
 configOther.register();
 
 
