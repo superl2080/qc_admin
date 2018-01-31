@@ -29,6 +29,7 @@ pointOrder.add({
         aderId:             { type: Types.Relationship, noedit: true, ref: 'ader', label: '所属广告主' },
         appid:              { type: Types.Text,         noedit: true, label: '广告appid' },
         qrcode_url:         { type: Types.Text,         noedit: true, label: '广告二维码' },
+        payout:             { type: Types.Number,       noedit: true, label: '广告计费(分)'},
     },
 
     }, '支付信息', {
