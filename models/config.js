@@ -12,7 +12,7 @@ var configAdChannel = new keystone.List('configAdChannel', {
 
 configAdChannel.add(
     '广告渠道信息', {
-    name:                       { type: Types.Text,         require: true, initial: true },
+    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'YOUFENTONG', label: '优粉通' }], label: '名称'},
     url:                        { type: Types.Textarea,     require: true, initial: true },
     bid:                        { type: Types.Text },
 });
@@ -47,26 +47,26 @@ configOther.register();
 
 
 /**
- * configPartnerDeduct Model
+ * configPartnerCharacter Model
  * ==========
  */
-var configPartnerDeduct = new keystone.List('configPartnerDeduct', {
-    label: '合伙收益设置',
-    plural: '合伙收益设置'
+var configPartnerCharacter = new keystone.List('configPartnerCharacter', {
+    label: '合伙人身份设置',
+    plural: '合伙人身份设置'
 });
 
-configPartnerDeduct.add(
-    '合伙收益信息', {
-    character:                  { type: Types.Text,         require: true, initial: true },
-    percent:                    { type: Types.Number,       require: true, initial: true },
+configPartnerCharacter.add(
+    '合伙人身份信息', {
+    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'DEVICER', label: '机器管理员' }, { value: 'OPERATOR', label: '运营管理员' }, { value: 'AGENT', label: '代理商' }], label: '名称'},
+    deduct:                     { type: Types.Number,       require: true, initial: true },
 });
 
 
 /**
  * Registration
  */
-configPartnerDeduct.defaultColumns = 'character, percent';
-configPartnerDeduct.register();
+configPartnerCharacter.defaultColumns = 'name, deduct';
+configPartnerCharacter.register();
 
 
 /**

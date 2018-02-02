@@ -18,9 +18,8 @@ partner.add({
         wechatId:           { type: Types.Text,         noedit: true, index: true, label: '微信openId' },
     },
 
-    isDefault:              { type: Types.Boolean,      default: false, label: '是否青橙官方' },
     balance:                { type: Types.Number,       default: 0, label: '待结算余额(分)'},
-    partnerDeductId:        { type: Types.Relationship, initial: true, ref: 'configPartnerDeduct', label: '合伙人收益' },
+    characterId:            { type: Types.Relationship, initial: true, ref: 'configPartnerCharacter', label: '身份' },
 
     info: {
         lastDate:           { type: Types.Datetime,     noedit: true, label: '上次登录日期'},
