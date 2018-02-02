@@ -44,5 +44,5 @@ point.add({
 /**
  * Registration
  */
-point.defaultColumns = 'partnerId, type, state, deviceInfo.devNo, createDate';
+point.defaultColumns = 'partnerId, deployInfo.shop, deployInfo.name, type, state, deviceInfo.devNo, createDate';
 point.register();
