@@ -47,7 +47,7 @@ ad.add({
 
     }, '微信公众号api接入-参数', {
     wechatMpApiInfo: {
-        adChannelId:        { type: Types.Relationship, ref: 'configAdChannel', label: '广告渠道' },
+        channelId:        { type: Types.Relationship, ref: 'configAdChannel', label: '广告渠道' },
     }
 });
 
