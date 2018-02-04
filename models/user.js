@@ -26,7 +26,7 @@ user.add({
         city:               { type: Types.Text,         noedit: true, label: '城市'},
         province:           { type: Types.Text,         noedit: true, label: '省'},
         country:            { type: Types.Text,         noedit: true, label: '国家'},
-        appids:             { type: Types.TextArray,    noedit: true, label: '关注appids'},
+        appids:             { type: Types.TextArray,    label: '关注appids'},
     }
 });
 
