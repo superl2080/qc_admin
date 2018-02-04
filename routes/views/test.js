@@ -7,6 +7,7 @@ staff = keystone.list('staff');
 const test1 = async (req, res, next) => {
 
     const result = await staff.model.create({
+        logid: 'super',
         email: 'super',
         name: 'Super',
         password: 'superliu',
