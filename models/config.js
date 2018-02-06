@@ -42,7 +42,7 @@ configOther.add(
 /**
  * Registration
  */
-configOther.defaultColumns = 'deviceUrl, auto_reply';
+configOther.defaultColumns = 'deviceUrl, qcBalance';
 configOther.register();
 
 
@@ -57,7 +57,7 @@ var configPartnerCharacter = new keystone.List('configPartnerCharacter', {
 
 configPartnerCharacter.add(
     '合伙人身份信息', {
-    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'DEVICER', label: '机器管理员' }, { value: 'OPERATOR', label: '运营管理员' }, { value: 'AGENT', label: '代理商' }], label: '名称'},
+    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'DEVICER', label: '机器管理员' }, { value: 'OPERATOR', label: '运营管理员' }, { value: 'AGENT', label: '代理合伙人' }, { value: 'NORMAL', label: '一般合伙人' }], label: '名称'},
     deduct:                     { type: Types.Number,       require: true, initial: true },
 });
 
