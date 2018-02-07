@@ -33,7 +33,7 @@ exports = module.exports = function (req, res) {
             const newAd = await ad.model.findById(req.query.adId);
             locals.ad = newAd;
             locals.state = 'CREATE';
-            locals.authUri = process.env.SERVICE_URL + '/wechat/open/adAuth?adId=' + req.query.adId;
+            locals.authUri = process.env.SERVICE_URL + '/pos/ad/wechatAuth?adId=' + req.query.adId;
             if( newAd.state != 'CREATE' ) {
                 locals.state = 'SUCCESS';
             }
