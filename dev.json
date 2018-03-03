@@ -4,6 +4,7 @@
             "name": "admin",
             "script": "keystone.js",
             "instances": "1",
+            "exec_mode": "cluster",
             "env": {
                 "WECHAT_MP_APP_ID": "wx1676ae64c9ab902c",
                 "WECHAT_MP_APP_SECRET": "2c3a4d54806a9f9442c6f5ebf10a1e53",

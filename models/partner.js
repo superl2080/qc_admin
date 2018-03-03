@@ -12,7 +12,7 @@ var partner = new keystone.List('partner', {
 });
 
 partner.add({
-    logid:                  { type: Types.Text,         noedit: true, label: '账号' },
+    logid:                  { type: Types.Text,         label: '账号' },
     password:               { type: Types.Password,     label: '密码' },
     name:                   { type: Types.Text,         required: true, initial: true, label: '名称' },
     createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
