@@ -21,7 +21,7 @@ pointOrder.add({
     item:                   { type: Types.Text,         noedit: true, label: '领取物品' },
     city:                   { type: Types.Text,         noedit: true, label: '领取城市' },
     price:                  { type: Types.Number,       noedit: true, label: '点位支付待付款(分)'},
-    state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '开放' }, { value: 'SUCCESS', label: '完成领取' }, { value: 'FAIL', label: '失败' }, { value: 'CANCEL', label: '取消' }], label: '状态'},
+    state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '等待支付' }, { value: 'SUCCESS', label: '领取成功' }, { value: 'FAIL', label: '领取失败' }, { value: 'CANCEL', label: '已取消' }], label: '状态'},
 
     }, '广告信息', {
     adInfo: {
