@@ -34,15 +34,16 @@ var configOther = new keystone.List('configOther', {
 
 configOther.add(
     '其他设置信息', {
-    deviceUrl:                  { type: Types.Textarea,     require: true },
+    deviceUrl:                  { type: Types.Textarea,     require: true, label: '机器服务器url' },
     qcBalance:                  { type: Types.Number,       require: true },
+    adDeliverLimit:             { type: Types.Number,       require: true, label: '限制用户每天取纸数' },
 });
 
 
 /**
  * Registration
  */
-configOther.defaultColumns = 'deviceUrl, qcBalance';
+configOther.defaultColumns = 'deviceUrl, qcBalance, adDeliverLimit';
 configOther.register();
 
 
