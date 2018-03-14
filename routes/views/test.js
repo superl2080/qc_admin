@@ -15,7 +15,7 @@ const test1 = async (req, res, next) => {
 
 exports = module.exports = function (app) {
 
-    app.get('/test/1', test1);
+    app.post('/test/1', test1);
 
 };
 
