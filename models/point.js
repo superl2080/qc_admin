@@ -35,7 +35,7 @@ point.add({
     info: {
         descript:           { type: Types.Text,         label: '备注' },
         city:               { type: Types.Text,         label: '城市' },
-        shop:               { type: Types.Text,         label: '商铺' },
+        shop:               { type: Types.Text,         label: '商户名' },
         mgrPhone:           { type: Types.Text,         label: '负责人手机' },
         mgrWechatId:        { type: Types.Text,         label: '负责人微信ID' },
     }
