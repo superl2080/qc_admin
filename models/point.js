@@ -45,5 +45,5 @@ point.add({
 /**
  * Registration
  */
-point.defaultColumns = 'partnerId, name, state, info.shop, info.mgrPhone, type';
+point.defaultColumns = 'name, partnerId, state, info.shop, info.mgrPhone, type';
 point.register();
