@@ -12,21 +12,37 @@ var configAdChannel = new keystone.List('configAdChannel', {
 
 configAdChannel.add(
     '广告渠道信息', {
-    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'YOUFENTONG', label: '优粉通' }], label: '名称'},
+    name:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'YOUFENTONG', label: '优粉通' }, { value: 'YUNDAI', label: '云袋' }], label: '名称'},
     url:                        { type: Types.Textarea,     require: true, initial: true },
     bid:                        { type: Types.Text },
 });
 
 /**
- * Registration
+ * configItem Model
+ * ==========
  */
-configAdChannel.defaultColumns = 'name, url';
-configAdChannel.register();
+configItem.defaultColumns = 'name, url';
+configItem.register();
+
+var configItem = new keystone.List('configItem', {
+    label: '物品设置',
+    plural: '物品设置'
+});
+
+configItem.add(
+    '物品设置信息', {
+    name:                       { type: Types.Text,         require: true, label: '物品名' },
+    price:                      { type: Types.Number,       require: true, label: '默认/最低价格' },
+});
+
 
 /**
  * configOther Model
  * ==========
  */
+configAdChannel.defaultColumns = 'name, url';
+configAdChannel.register();
+
 var configOther = new keystone.List('configOther', {
     label: '其他设置',
     plural: '其他设置'
@@ -41,16 +57,12 @@ configOther.add(
 
 
 /**
- * Registration
+ * configPartnerCharacter Model
+ * ==========
  */
 configOther.defaultColumns = 'deviceUrl, qcBalance, adDeliverLimit';
 configOther.register();
 
-
-/**
- * configPartnerCharacter Model
- * ==========
- */
 var configPartnerCharacter = new keystone.List('configPartnerCharacter', {
     label: '合伙人身份设置',
     plural: '合伙人身份设置'
@@ -64,16 +76,12 @@ configPartnerCharacter.add(
 
 
 /**
- * Registration
+ * configWechatOpen Model
+ * ==========
  */
 configPartnerCharacter.defaultColumns = 'name, deduct';
 configPartnerCharacter.register();
 
-
-/**
- * configWechatOpen Model
- * ==========
- */
 var configWechatOpen = new keystone.List('configWechatOpen', {
     label: '微信开发平台',
     plural: '微信开发平台',

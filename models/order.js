@@ -2,26 +2,27 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * pointOrder Model
+ * order Model
  * ==========
  */
-var pointOrder = new keystone.List('order', {
+var order = new keystone.List('order', {
     label: '订单',
     plural: '订单',
     nocreate: true,
     defaultSort: '-createDate'
 });
 
-pointOrder.add({
+order.add({
     createDate:             { type: Types.Datetime,     noedit: true, label: '创建日期'},
 
     userId:                 { type: Types.Relationship, noedit: true, ref: 'user', label: '消费用户' },
     pointId:                { type: Types.Relationship, noedit: true, ref: 'point', label: '消费点位' },
     partnerId:              { type: Types.Relationship, noedit: true, ref: 'partner', label: '合伙人' },
-    item:                   { type: Types.Text,         noedit: true, label: '领取物品' },
-    city:                   { type: Types.Text,         noedit: true, label: '领取城市' },
-    price:                  { type: Types.Number,       noedit: true, label: '点位支付待付款(分)'},
     state:                  { type: Types.Select,       noedit: true, options: [{ value: 'OPEN', label: '等待支付' }, { value: 'SUCCESS', label: '领取成功' }, { value: 'FAIL', label: '领取失败' }, { value: 'CANCEL', label: '已取消' }], label: '状态'},
+    item: {
+        itemId:             { type: Types.Relationship, required: true, initial: true, ref: 'configItem', label: '物品' },
+        price:              { type: Types.Number,       noedit: true, label: '点位支付待付款(分)'},
+    },
 
     }, '广告信息', {
     adInfo: {
@@ -47,5 +48,5 @@ pointOrder.add({
 /**
  * Registration
  */
-pointOrder.defaultColumns = 'userId, pointId, price, state, city, payInfo.type, createDate';
-pointOrder.register();
+order.defaultColumns = 'userId, pointId, price, state, city, payInfo.type, createDate';
+order.register();

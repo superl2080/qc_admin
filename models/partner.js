@@ -27,7 +27,6 @@ partner.add({
         lastDate:           { type: Types.Datetime,     noedit: true, label: '上次登录日期'},
         loginTimes:         { type: Types.Number,       noedit: true, default: 0, label: '登录次数' },
         children:           { type: Types.Relationship, initial: true, ref: 'partner', many: true, label: '下属合伙人' },
-        shop:               { type: Types.Text,         label: '店名' },
         city:               { type: Types.Text,         label: '城市名' },
         phone:              { type: Types.Text,         label: '联系电话' },
         descript:           { type: Types.Text,         label: '备注' },

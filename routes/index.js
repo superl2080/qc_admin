@@ -16,9 +16,7 @@ exports = module.exports = function (app) {
     // Views
     app.get('/', routes.views.home);
     
-    if( process.env.NODE_ENV == 'test' ) {
-        routes.views.test(app);
-    }
+    routes.views.test(app);
 
     app.get('/createAd', middleware.requireUser);
     app.get('/createAd', routes.views.createAd);

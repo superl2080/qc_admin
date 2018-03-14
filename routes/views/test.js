@@ -1,19 +1,16 @@
 
 var keystone = require('keystone');
-
-staff = keystone.list('staff');
  
 
 const test1 = async (req, res, next) => {
+    console.log(__filename + '\n[CALL] test1, body:');
+    console.log(req.body);
 
-    const result = await staff.model.create({
-        logid: 'super',
-        email: 'super',
-        name: 'Super',
-        password: 'superliu',
-        character: 'MANAGER',
+    res.send({
+      appid: 'wx1676ae64c9ab902c',
+      qrcode_url: 'http://open.weixin.qq.com/qr/code?username=gh_38c6917c1dd1',
+      payout: 60,
     });
-    res.send(result);
 }
 
 exports = module.exports = function (app) {

@@ -13,6 +13,7 @@ var point = new keystone.List('point', {
 
 point.add({
     createDate:             { type: Types.Datetime,     noedit: true, default: Date.now, label: '创建日期'},
+    name:                   { type: Types.Text,         required: true, initial: true, label: '点位名' },
 
     partnerId:              { type: Types.Relationship, required: true, initial: true, ref: 'partner', label: '所属合伙人' },
     type:                   { type: Types.Select,       noedit: true, default: 'POINT', options: [{ value: 'POINT', label: '点位' }, { value: 'DEVICE', label: '机器' }], label: '类型'},
@@ -23,20 +24,19 @@ point.add({
         devNo:              { type: Types.Text,         noedit: true, label: '设备编码' },
         type:               { type: Types.Select,       noedit: true, options: [{ value: 'JUANZHI', label: '卷纸机' }, { value: 'ZHIJIN', label: '纸巾机' }], label: '机器类型'},
         state:              { type: Types.Text,         noedit: true, label: '设备状态' },
-    },
 
-    }, '部署信息', {
-    deployInfo: {
-        price:              { type: Types.Number,       label: '点位支付用户计费(分)'},
-        item:               { type: Types.Text,         label: '物品名' },
-        name:               { type: Types.Text,         label: '点位名' },
-        shop:               { type: Types.Text,         label: '店铺名' },
-        city:               { type: Types.Text,         label: '城市' },
-        operatorWechatId:   { type: Types.Text,         label: '运维通知人' },
+    }, '物品信息', {
+    item: {
+        itemId:             { type: Types.Relationship, required: true, initial: true, ref: 'configItem', label: '物品' },
+        price:              { type: Types.Number,       required: true, initial: true, label: '点位支付待付款(分)'},
     },
 
     info: {
-        descript:           { type: Types.Text,         noedit: true, label: '备注' },
+        descript:           { type: Types.Text,         label: '备注' },
+        city:               { type: Types.Text,         label: '城市' },
+        shop:               { type: Types.Text,         label: '商铺' },
+        mgrPhone:           { type: Types.Text,         label: '负责人手机' },
+        mgrWechatId:        { type: Types.Text,         label: '负责人微信ID' },
     }
 });
 
@@ -44,5 +44,5 @@ point.add({
 /**
  * Registration
  */
-point.defaultColumns = 'partnerId, deployInfo.shop, deployInfo.name, type, state, deviceInfo.devNo, createDate';
+point.defaultColumns = 'partnerId, name, state, info.shop, info.mgrPhone, type';
 point.register();
