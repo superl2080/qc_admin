@@ -32,8 +32,8 @@ var configItem = new keystone.List('configItem', {
 
 configItem.add(
     '物品设置信息', {
-    name:                       { type: Types.Text,         require: true, label: '物品名' },
-    price:                      { type: Types.Number,       require: true, label: '默认/最低价格' },
+    name:                       { type: Types.Text,         require: true, initial: true, label: '物品名' },
+    price:                      { type: Types.Number,       require: true, initial: true, label: '默认/最低价格' },
 });
 
 configItem.defaultColumns = 'name, price';
