@@ -11,7 +11,7 @@ exports = module.exports = function (req, res) {
 
     view.on('init', async function (next) {
         const points = await point.model.find({
-            state: { $in: ['DEPLOY', 'TEST'] }
+            state: { $in: ['DEPLOY', 'OPEN'] }
         }).exec();
         locals.points = points;
         locals.state = 'PRE';
