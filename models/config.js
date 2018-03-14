@@ -17,13 +17,14 @@ configAdChannel.add(
     bid:                        { type: Types.Text },
 });
 
+configAdChannel.defaultColumns = 'name, url';
+configAdChannel.register();
+
+
 /**
  * configItem Model
  * ==========
  */
-configItem.defaultColumns = 'name, url';
-configItem.register();
-
 var configItem = new keystone.List('configItem', {
     label: '物品设置',
     plural: '物品设置'
@@ -35,14 +36,14 @@ configItem.add(
     price:                      { type: Types.Number,       require: true, label: '默认/最低价格' },
 });
 
+configItem.defaultColumns = 'name, price';
+configItem.register();
+
 
 /**
  * configOther Model
  * ==========
  */
-configAdChannel.defaultColumns = 'name, url';
-configAdChannel.register();
-
 var configOther = new keystone.List('configOther', {
     label: '其他设置',
     plural: '其他设置'
@@ -55,13 +56,13 @@ configOther.add(
     adDeliverLimit:             { type: Types.Number,       require: true, label: '限制用户每天取纸数' },
 });
 
+configOther.defaultColumns = 'deviceUrl, qcBalance, adDeliverLimit';
+configOther.register();
 
 /**
  * configPartnerCharacter Model
  * ==========
  */
-configOther.defaultColumns = 'deviceUrl, qcBalance, adDeliverLimit';
-configOther.register();
 
 var configPartnerCharacter = new keystone.List('configPartnerCharacter', {
     label: '合伙人身份设置',
@@ -74,13 +75,13 @@ configPartnerCharacter.add(
     deduct:                     { type: Types.Number,       require: true, initial: true },
 });
 
+configPartnerCharacter.defaultColumns = 'name, deduct';
+configPartnerCharacter.register();
 
 /**
  * configWechatOpen Model
  * ==========
  */
-configPartnerCharacter.defaultColumns = 'name, deduct';
-configPartnerCharacter.register();
 
 var configWechatOpen = new keystone.List('configWechatOpen', {
     label: '微信开发平台',
@@ -95,10 +96,6 @@ configWechatOpen.add(
     expires_in:                 { type: Types.Datetime,     noedit: true },
 });
 
-
-/**
- * Registration
- */
 configWechatOpen.defaultColumns = 'ticket, access_token, expires_in';
 configWechatOpen.register();
 
