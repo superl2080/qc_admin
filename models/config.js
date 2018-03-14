@@ -34,9 +34,10 @@ configItem.add(
     '物品设置信息', {
     name:                       { type: Types.Text,         require: true, initial: true, label: '物品名' },
     price:                      { type: Types.Number,       require: true, initial: true, label: '默认/最低价格' },
+    type:                       { type: Types.Select,       require: true, initial: true, options: [{ value: 'OTHER', label: '其他' }, { value: 'ZHIJIN', label: '纸巾' }], label: '类型'},
 });
 
-configItem.defaultColumns = 'name, price';
+configItem.defaultColumns = 'name, price, type';
 configItem.register();
 
 
