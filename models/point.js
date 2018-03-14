@@ -24,6 +24,7 @@ point.add({
         devNo:              { type: Types.Text,         noedit: true, label: '设备编码' },
         type:               { type: Types.Select,       noedit: true, options: [{ value: 'JUANZHI', label: '卷纸机' }, { value: 'ZHIJIN', label: '纸巾机' }], label: '机器类型'},
         state:              { type: Types.Text,         noedit: true, label: '设备状态' },
+    },
 
     }, '物品信息', {
     item: {
