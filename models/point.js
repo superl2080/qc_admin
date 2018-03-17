@@ -30,6 +30,7 @@ point.add({
     item: {
         itemId:             { type: Types.Relationship, required: true, initial: true, ref: 'configItem', label: '物品' },
         price:              { type: Types.Number,       required: true, initial: true, label: '点位支付待付款(分)'},
+        name:               { type: Types.Text,         required: true, initial: true, label: '物品名' },
     },
 
     info: {
